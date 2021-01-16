@@ -1,7 +1,8 @@
 import com.leetcodetest.Jan.*;
 public class Main {
     public static void main(String[] args) {
-        _15 s = new _15();
-        s._21_1_15();
+        _16 s = new _16();
+        s._21_1_16();
     }
 }
+
