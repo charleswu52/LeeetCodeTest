@@ -1,8 +1,8 @@
 import com.leetcodetest.Feb.*;
 public class Main {
     public static void main(String[] args) {
-        _1 test = new _1();
-        test._21_2_1();
+        _2 test = new _2();
+        test._21_2_2();
 
     }
 }
