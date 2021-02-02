@@ -43,6 +43,7 @@ public class _2 {
             }
             right++;
         }
+
         return right - left;
     }
 
