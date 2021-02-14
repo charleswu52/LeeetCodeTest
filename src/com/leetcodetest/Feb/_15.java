@@ -17,6 +17,10 @@ public class _15 {
      * 输入数组的长度是正整数，且不超过 10,000。
      */
 
+    /*
+    思路：一次遍历
+    遍历一遍数组，遇到是1的二进制数就累加，不是啦就重置重新累加
+     */
     public int findMaxConsecutiveOnes(int[] nums) {
         int maxCount = 0, count = 0;
         int len = nums.length;
