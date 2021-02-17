@@ -58,6 +58,7 @@ public class _17 {
     /*
     思路2：不使用额外空间
     统计所有元素个数，然后重塑数组，行号是除列数，列号是对对列数取余
+
      */
     public int[][] matrixReshape2(int[][] nums, int r, int c) {
         int oldR = nums.length, oldC = nums[0].length;
