@@ -2,8 +2,8 @@ import com.leetcodetest.Mar.*;
 
 public class Main {
     public static void main(String[] args) {
-        _5 test = new _5();
-        test._21_3_5();
+        _6 test = new _6();
+        test._21_3_6();
 
     }
 }
