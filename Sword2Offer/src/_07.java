@@ -90,7 +90,6 @@ public class _07 {
         if (in_left_idx > in_right_idx) {
             return null;
         }
-
         // root_idx是先序里面的
         TreeNode root = new TreeNode(preorder[pre_root_idx]);
         // 有了先序的,再根据先序的，在中序中获 当前根的索引
