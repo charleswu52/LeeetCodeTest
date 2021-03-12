@@ -8,7 +8,7 @@ public class Sword2OfferTest {
      * @param args
      */
     public static void main(String[] args) {
-        _11 test = new _11();
-        test.sword2Offer_11();
+        _13 test = new _13();
+        test.sword2Offer_13();
     }
 }

@@ -24,7 +24,7 @@ public class _11 {
         if (n < 2) {
             return numbers[0];
         }
-        for (int i = 0; i < n-1; i++) {
+        for (int i = 0; i < n - 1; i++) {
             if (numbers[i] > numbers[i + 1]) {
                 return numbers[i + 1];
             }
@@ -36,11 +36,12 @@ public class _11 {
      * 改进思路2：二分法查找.
      * 1. 声明双指针i，j分别指向数组的两端
      * 2. 循环二分：
-     *     中点设置为 m = （i+j）/ 2
-     *     当nums[m]>nums[j]时，m一定在左边递增的排序数组中，旋转点则在右边[m+1,j]内,再设置 i=m+1
-     *     当numbers[m] < numbers[j]时，m一定在右排序数组中，旋转点则在[i,m]内，再设置 j = m
-     *     当numbers[m] = numbers[j]时，无法判断旋转点在哪个区间内,解决方案是执行j=j-1缩小判断范围
+     * 中点设置为 m = （i+j）/ 2
+     * 当nums[m]>nums[j]时，m一定在左边递增的排序数组中，旋转点则在右边[m+1,j]内,再设置 i=m+1
+     * 当numbers[m] < numbers[j]时，m一定在右排序数组中，旋转点则在[i,m]内，再设置 j = m
+     * 当numbers[m] = numbers[j]时，无法判断旋转点在哪个区间内,解决方案是执行j=j-1缩小判断范围
      * 3.当i=j时跳出二分循环，返回旋转点的值numbers[i]
+     *
      * @param numbers
      * @return
      */
@@ -55,12 +56,11 @@ public class _11 {
         return numbers[i];
 
 
-
     }
 
 
-        public void sword2Offer_11() {
-        int[] numbers = {3,4,5,1,2};
+    public void sword2Offer_11() {
+        int[] numbers = {3, 4, 5, 1, 2};
         System.out.println(minArray(numbers));
         System.out.println(minArray2(numbers));
     }
