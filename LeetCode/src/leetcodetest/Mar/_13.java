@@ -41,7 +41,7 @@ public class _13 {
      *
      * <p>
      * 数据范围：
-     * 0 <= key <= 106
+     * 0 <= key <= 10^6
      * 最多调用 10^4 次 add、remove 和 contains 。
      */
 
