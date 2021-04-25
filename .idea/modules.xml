@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/LeetCode/LeetCode.iml" filepath="$PROJECT_DIR$/LeetCode/LeetCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProgrammerInterviewGoldenCode/ProgrammerInterviewGoldenCode.iml" filepath="$PROJECT_DIR$/ProgrammerInterviewGoldenCode/ProgrammerInterviewGoldenCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sword2Offer/Sword2Offer.iml" filepath="$PROJECT_DIR$/Sword2Offer/Sword2Offer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WeeklyMatch/WeeklyMatch.iml" filepath="$PROJECT_DIR$/WeeklyMatch/WeeklyMatch.iml" />
     </modules>
   </component>
 </project>
