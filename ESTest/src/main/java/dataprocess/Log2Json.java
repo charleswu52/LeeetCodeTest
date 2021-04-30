@@ -25,7 +25,7 @@ public class Log2Json {
                 }
                 reader.close();
 //                File newFile =new File(outPath+"log_plain_"+tempList[i].getName()+".json");
-                File newFile =new File(outPath+"log_utf8_"+tempList[i].getName()+".log");
+                File newFile =new File(outPath+tempList[i].getName()+".json");
 //                File newFile =new File(outPath+"log8_1_ngram_"+i+".json");
 //                BufferedWriter out = new BufferedWriter(new FileWriter(outPath+tempList[i].getName()+".json"));
                 //true = append file
