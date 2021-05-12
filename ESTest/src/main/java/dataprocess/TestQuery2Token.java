@@ -3,6 +3,10 @@ package dataprocess;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.junit.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author WuChao
@@ -46,5 +50,30 @@ public class TestQuery2Token {
             System.out.println(trans);
             tokenStream.close();
         }
+    }
+
+    public void cutQuery(String field)throws Exception {
+        StandardAnalyzer analyzer = new StandardAnalyzer();
+        TokenStream tokenStream = analyzer.tokenStream("", field);
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        tokenStream.reset();
+        String trans = "";
+        int tokenLen=0;
+        Set<String> set = new HashSet<>();
+        while (tokenStream.incrementToken()) {
+            trans += charTermAttribute.toString() + " ";
+            set.add(charTermAttribute.toString());
+            tokenLen++;
+        }
+        System.out.println("Query：\n" + trans + "\ntokenLength:" + tokenLen + ";tokenSetLen:" + set.size());
+        tokenStream.close();
+    }
+
+    @Test
+    public void test()throws Exception{
+        String query =
+                "as sl_1_tag108 from szsslkjyxgs_1ou7 autogen 68885b4c32ff4708a8a649c9b4baae59 where gatewayid 2c938083783650af01786535768406ac and time 2021 03 29t08 44\n";
+        cutQuery(query);
+
     }
 }
