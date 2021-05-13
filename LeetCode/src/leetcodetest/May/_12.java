@@ -6,7 +6,7 @@ package leetcodetest.May;
  */
 public class _12 {
     /**
-     * 每日一题：2021/5/11
+     * 每日一题：2021/5/12
      * 1310. 子数组异或查询
      * 难度: medium
      * <p>
