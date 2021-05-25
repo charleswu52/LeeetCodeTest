@@ -73,7 +73,8 @@ public class TestQuery2Token {
     public void test()throws Exception{
         String query =
                 "as sl_1_tag108 from szsslkjyxgs_1ou7 autogen 68885b4c32ff4708a8a649c9b4baae59 where gatewayid 2c938083783650af01786535768406ac and time 2021 03 29t08 44\n";
-        cutQuery(query);
+        String s = "SHOW TAG VALUES ON _internal WITH KEY = hostname WHERE (_name = 'database') AND (_tagKey = 'hostname')";
+        cutQuery(s);
 
     }
 }
