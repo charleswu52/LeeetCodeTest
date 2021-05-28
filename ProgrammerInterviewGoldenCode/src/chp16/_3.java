@@ -7,7 +7,7 @@ package chp16;
 public class _3 {
     /**
      * 程序员面试金典(version 6) - 面试题 16.03. 交点
-     * 难度: medium
+     * 难度: hard
      * <p>
      * 给定两条线段（表示为起点start = {X1, Y1}和终点end = {X2, Y2}），如果它们有交点，请计算其交点，没有交点则返回空值。
      * <p>
@@ -31,6 +31,10 @@ public class _3 {
      * 1 <= book.length <= 100000
      * 1 <= book[i].length <= 10
      * get函数的调用次数不会超过100000
+     */
+
+    /*
+    解法参考题解，涉及数学知识较多，建议移步到
      */
     double[] ans = new double[0];
     public double[] intersection(int[] start1, int[] end1, int[] start2, int[] end2) {
