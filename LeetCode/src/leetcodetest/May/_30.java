@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class _30 {
     /**
-     * 每日一题：2021/5/29
+     * 每日一题：2021/5/30
      * 231. 2 的幂
      * 难度: easy
      * <p>
