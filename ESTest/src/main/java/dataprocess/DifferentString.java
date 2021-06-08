@@ -11,8 +11,8 @@ import java.util.Set;
  */
 public class DifferentString {
     public static void main(String[] args) throws Exception {
-        String path = "/home/charles/WorkSpace/ES实验/logs_trans/oneLogFields/";
-        File file = new File(path+"Amplifier=.txt");
+        String path = "/home/charles/WorkSpace/ES实验/logs_trans/allLogsFields/";
+        File file = new File(path+"db.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         String temp = null;
         Set<String> strings = new HashSet<>();
