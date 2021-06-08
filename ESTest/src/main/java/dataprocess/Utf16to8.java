@@ -10,13 +10,13 @@ import java.nio.charset.StandardCharsets;
 public class Utf16to8 {
     // 将utf-16 格式的文件转为8
     public static void main(String[] args) {
-        String path = "/home/charles/WorkSpace/ES实验/utf16";
+        String path = "/home/charles/WorkSpace/ES实验/logs";
         File file = new File(path);
         File[] tempList = file.listFiles();
         BufferedReader reader = null;
         String outPath = "/home/charles/WorkSpace/ES实验/utf8/";
-        int line = 1;
-        for (int i = 0; i < tempList.length; i++) {
+//        int line = 1;
+        for (int i = 0; i < 1; i++) {
             try {
                 StringBuffer sbf = new StringBuffer();
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(tempList[i]), StandardCharsets.UTF_16));//new BufferedReader(new FileReader());
@@ -26,7 +26,7 @@ public class Utf16to8 {
                     sbf.append(temp+"\n");
                 }
                 reader.close();
-                File newFile =new File(outPath+tempList[i].getName()+".txt");
+                File newFile =new File(outPath+tempList[i].getName()+".json");
                 if(!newFile.exists()){
                     newFile.createNewFile();
                 }
