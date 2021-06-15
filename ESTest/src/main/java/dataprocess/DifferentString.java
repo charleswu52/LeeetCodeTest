@@ -2,8 +2,7 @@ package dataprocess;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author WuChao
@@ -11,26 +10,42 @@ import java.util.Set;
  */
 public class DifferentString {
     public static void main(String[] args) throws Exception {
-        String path = "/home/charles/WorkSpace/ES实验/logs_trans/allLogsFields/";
-        File file = new File(path + "msg.txt");
+        String path = "/home/charles/WorkSpace/ES实验/logs_trans/oneLogFields/";
+        File file = new File(path + "path.txt");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
         String temp = null;
         Set<String> strings = new HashSet<>();
+        HashMap<String, Integer> strCount = new HashMap<>();
+        String maxStr = "";
         int maxLen = Integer.MIN_VALUE;
         while ((temp = bufferedReader.readLine()) != null) {
-//            if (temp.length() < 80) {
-//                strings.add(temp);
-//                maxLen = Math.max(maxLen, temp.length());
-//            }
-            if (temp.startsWith("select") || temp.startsWith("SELECT")) {
-                strings.add(temp);
-            }
+            strCount.put(temp, strCount.getOrDefault(temp, 0) + 1);
         }
 
+        Iterator<Map.Entry<String, Integer>> iterator = strCount.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Integer> next = iterator.next();
+//            if (next.getValue() >= 400 ) {
+//                System.out.println("query: " + next.getKey() + " ;result_size:" + next.getValue());
+//            }
+            if (next.getValue() > maxLen) {
+                maxLen = next.getValue();
+                maxStr = next.getKey();
+            }
+        }
+        if (strCount.containsKey("/tsdb/b836e78214e0486a9fd1c2543f3124e2in13/data/jufengshukong/monitor/8772/index/1/L1-00000002.tsi")) {
+            System.out.println("有");
+
+        }else {
+            System.out.println("无");
+        }
+
+
         bufferedReader.close();
-        System.out.println("Count:" + strings.size());
-//        for (String s : strings) {
-//            System.out.println(s);
-//        }
+        System.out.println("Count: " + strCount.size());
+        System.out.println("maxLen: " + maxLen);
+        System.out.println("maxLenStr: " + maxStr);
+
+
     }
 }
