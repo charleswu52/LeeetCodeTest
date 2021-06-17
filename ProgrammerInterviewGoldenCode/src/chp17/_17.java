@@ -2,9 +2,7 @@ package chp17;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author WuChao
@@ -32,6 +30,9 @@ public class _17 {
      * 所有出现的字符均为英文小写字母。
      */
 
+    /*
+    思路1： 根据small中的单词对big进行切分 然后遍历计算位置 -》 暂无AC
+     */
     public int[][] multiSearch(String big, String[] smalls) {
         if ("".equals(big) ||(smalls.length == 1 && "".equals(smalls[0]))) {
             int[][] ans = new int[smalls.length][];
@@ -74,7 +75,86 @@ public class _17 {
 
     }
 
-    @Test
+    /*
+    思路2： 使用前缀树 -》 AC
+     */
+
+    class Trie{
+        TrieNode root;
+
+        public Trie(String[] words) {
+            root = new TrieNode();
+            for (String word : words) {
+                TrieNode node = root;
+                for (char w : word.toCharArray()) {
+                    int i = w - 'a';
+                    if (node.next[i] == null) {
+                        node.next[i] = new TrieNode();
+                    }
+                    node = node.next[i];
+                }
+                node.end = word;
+            }
+        }
+
+        public List<String> search(String str) {
+            TrieNode node = root;
+            List<String> res = new ArrayList<>();
+            for (char ch : str.toCharArray()) {
+                int i = ch - 'a';
+                if (node.next[i] == null) {
+                    break;
+                }
+                node = node.next[i];
+                if (node.end != null) {
+                    res.add(node.end);
+                }
+            }
+            return res;
+        }
+    }
+    class TrieNode{
+        String end;
+        TrieNode[] next = new TrieNode[26];
+    }
+
+
+    /*
+    使用前缀树进行多次搜索
+     */
+    public int[][] multiSearch2(String big, String[] smalls) {
+        Trie trie = new Trie(smalls);
+        Map<String, List<Integer>> hit = new HashMap<>();
+        for (int i = 0; i < big.length(); i++) {
+            List<String> matchs = trie.search(big.substring(i));
+            for (String word : matchs) {
+                if (!hit.containsKey(word)) {
+                    hit.put(word, new ArrayList<>());
+                }
+                hit.get(word).add(i);
+            }
+        }
+
+        int[][] res = new int[smalls.length][];
+        for (int i = 0; i < smalls.length; i++) {
+            List<Integer> list = hit.get(smalls[i]);
+            if (list == null) {
+                res[i] = new int[0];
+                continue;
+            }
+            int size = list.size();
+            res[i] = new int[size];
+            for (int j = 0; j < size; j++) {
+                res[i][j] = list.get(j);
+            }
+        }
+        return res;
+
+    }
+
+
+
+        @Test
     public void test() {
         String big = "mississippi";
         String[] smalls = {"is","ppi","hi","sis","i","ssippi"};
