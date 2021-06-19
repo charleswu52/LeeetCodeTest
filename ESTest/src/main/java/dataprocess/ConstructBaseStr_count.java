@@ -26,23 +26,36 @@ public class ConstructBaseStr_count {
                  */
                 String fileName = files[i].getName();
                 int maxLen = Integer.MIN_VALUE;
+                int maxLen2 = Integer.MIN_VALUE;
                 String maxStr="";
+
+
+                String maxStr1="";
+
                 LinkedHashMap<String, Integer> stringCount = new LinkedHashMap<>();
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(files[i]), "UTF-8"));//new BufferedReader(new FileReader());
                 String temp = null;
                 while ((temp = reader.readLine()) != null) {
                     String t = temp.substring(50);
                     stringCount.put(t, stringCount.getOrDefault(t, 0) + 1);
-                }
-                reader.close();
-                Iterator<Map.Entry<String, Integer>> iterator = stringCount.entrySet().iterator();
-                while (iterator.hasNext()) {
-                    Map.Entry<String, Integer> next = iterator.next();
-                    if (next.getValue() > maxLen) {
-                        maxLen = next.getValue();
-                        maxStr = next.getKey();
+                    if (stringCount.get(t) > maxLen2) {
+                        maxLen2 = stringCount.get(t);
+                        maxStr = temp;
+
                     }
                 }
+                reader.close();
+//                Iterator<Map.Entry<String, Integer>> iterator = stringCount.entrySet().iterator();
+//                while (iterator.hasNext()) {
+//                    Map.Entry<String, Integer> next = iterator.next();
+//                    if (next.getValue() > maxLen) {
+//                        maxLen = next.getValue();
+//                        maxStr = next.getKey();
+//                    }
+//                }
+
+
+
 //                System.out.println(maxLen);
                 fileStr.put(fileName, maxStr);
 
@@ -50,10 +63,11 @@ public class ConstructBaseStr_count {
                 e.printStackTrace();
             }
         }
+
         Iterator<Map.Entry<String, String>> iterator = fileStr.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> next = iterator.next();
-            File newFile = new File(outPath +"countStr.txt");
+            File newFile = new File(outPath +"出现次数最多的串.txt");
             if (!newFile.exists()) {
                 newFile.createNewFile();
             }
@@ -64,6 +78,8 @@ public class ConstructBaseStr_count {
             bufferedWriter.flush();// 清空缓冲区
             bufferedWriter.close();// 关闭输出流
         }
+
+
 
 
 
