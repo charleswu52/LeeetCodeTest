@@ -1,2 +1,2 @@
-# LeeetCodeTest
-Leetcode每日一题打卡
+# Daily algorithm exercises
+Stay hungry, stay foolish!
