@@ -12,7 +12,8 @@ import java.util.Map;
  */
 public class ConstructBaseStr_count {
     public static void main(String[] args) throws Exception {
-        String path = "E:\\研究生学习\\ES测试\\levelFields";
+//        String path = "E:\\研究生学习\\ES测试\\levelFields";
+        String path = "E:\\levelFields\\third\\-379033988";
         String outPath = "E:\\研究生学习\\ES测试\\output\\";
 
         File dir = new File(path);
@@ -67,7 +68,7 @@ public class ConstructBaseStr_count {
         Iterator<Map.Entry<String, String>> iterator = fileStr.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> next = iterator.next();
-            File newFile = new File(outPath +"出现次数最多的串.txt");
+            File newFile = new File(outPath +"-379033988出现次数最多的串.txt");
             if (!newFile.exists()) {
                 newFile.createNewFile();
             }
