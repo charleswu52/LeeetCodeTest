@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class _1 {
     /**
-     * 每日一题：2021/6/1
+     * 每日一题：2021/7/1
      * LCP 07. 传递信息
      * 难度: easy
      * <p>

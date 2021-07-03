@@ -66,7 +66,6 @@ public class Main_1 {
                     store[i][1] = tmp;
                 }
             }
-            Arrays.sort(store, Comparator.comparingInt(data -> data[0]));
             UnionFind unionFind = new UnionFind(size+1);
             for (int[] row : store) {
                 unionFind.unionElements(row[0], row[1]);
@@ -80,13 +79,16 @@ public class Main_1 {
      */
     static class UnionFind {
         private int[] parent;
+        private int[] res;
         private int size;
 
         public UnionFind(int size) {
             this.size = size;
             parent = new int[size];
+            res = new int[size];
             for (int i = 0; i < size; i++) {
                 parent[i] = i;
+                res[i] = 1;
             }
         }
 
@@ -97,6 +99,7 @@ public class Main_1 {
          */
         private int find(int element) {
             while (element != parent[element]) {
+                parent[element] = parent[parent[element]];
                 element = parent[element];
             }
             return element;
@@ -112,14 +115,9 @@ public class Main_1 {
         public void unionElements(int firstElement, int secondElement) {
             int firstRoot = find(firstElement);
             int secondRoot = find(secondElement);
-            if (firstRoot == secondRoot) {
-                return;
-            }
-            if (firstRoot > secondRoot) {
-
+            if (firstRoot != secondRoot) {
                 parent[firstRoot] = secondRoot;
-            } else {
-                parent[secondRoot] = firstRoot;
+                res[secondRoot] += res[firstRoot];
             }
         }
 
@@ -128,23 +126,13 @@ public class Main_1 {
          * @return
          */
         public int getSetSize() {
-//            System.out.println(Arrays.toString(parent));
-            Map<Integer, Integer> map = new HashMap<>();
-            int res = Integer.MIN_VALUE;
-            for (int num : parent) {
-                map.put(num, map.getOrDefault(num, 0) + 1);
-            }
-//            Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
-//            while (iterator.hasNext()) {
-//                Map.Entry<Integer, Integer> next = iterator.next();
-//                System.out.println(next.getKey() + " : " + next.getValue());
-//            }
-            for (int val : map.values()) {
-                if (val > res) {
-                    res = val;
+            int ans = 0;
+            for (int i = 0; i < size; i++) {
+                if (res[i] > ans) {
+                    ans = res[i];
                 }
             }
-            return res;
+            return ans;
         }
 
 
