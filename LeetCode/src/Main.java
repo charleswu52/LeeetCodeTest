@@ -1,4 +1,4 @@
-import leetcodetest.Mar.*;
+import leetcode_everyday.Mar.*;
 
 public class Main {
     public static void main(String[] args) {
