@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class _7 {
     /**
-     * 每日一题：2021/7/6
+     * 每日一题：2021/7/7
      * 1711. 大餐计数
      * 难度: medium
      * <p>
