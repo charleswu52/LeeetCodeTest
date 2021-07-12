@@ -16,26 +16,18 @@ public class TestQuery2Token {
     // 将之前的query进行分词处理
     public static void main(String[] args)throws Exception {
 
-        String[] fields = {"SELECT",
-                "SELECT last(SL_1_Tag108) AS SL_1_Tag108",
-                "and",
+        String[] fields = {
+                "DB1.DBW2",
+                       " (C1_B1_G1_Tag3)",
                 "SHOW TAG VALUES ON",
-                "fill(none)",
-                "SZSSLKJYXGS_1OU7.autogen.",
-                        "WHERE gatewayId = '2c938083783650af01786535768406ac'",
-                "AND time >= '2021-03-29T08:36:32Z' AND time <= '2021-03-30T08:36:32Z'",
-                "SELECT last(SL_1_Tag118) AS SL_1_Tag118 FROM SZSSLKJYXGS_1OU7.autogen.",
-                "SHOW TAG VALUES ON _internal WITH KEY = hostname WHERE (_name = 'database') AND (_tagKey = 'hostname')",
-                "WHERE gatewayId = '2c938083783650af01786535768406ac'",
-                "last(SL_1_Tag18)",
-                "difference(pointsWrittenOK) / 60",
-                "gatewayId = '2c938083783650af01786535768406ac' AND time >= '2021-03-29T08:37:13Z' AND time <= '2021-03-30T08:37:13Z'",
-                "count(C1_B1_G1_Tag3)",
-                "046ed1449dec435d83f99f524b0b6b5f",
+                "pointswrittenok",
+                "database",
+                "SL_1_Tag114",
+               " count",
+                "difference",
                 "hostname",
                 "autogen",
-                "select DIFFERENCE(pointsWrittenOK)/60 from httpd where time > now() - 120s and bind='192.168.1.198:8635,172.16.11.6:8635'",
-                "time <= '2021-03-30T08:38:48Z'"
+                "AND time>='2021-03-29T08:36:32Z' AND time <='2021-03-30T08:36:32Z\n"
         };
         for (String field : fields) {
             StandardAnalyzer analyzer = new StandardAnalyzer();
