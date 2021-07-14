@@ -1,4 +1,4 @@
-package _210703.weilai;
+package weilai._210703;
 
 public class Main_2 {
     public int minNumberInRotateArray(int [] array) {

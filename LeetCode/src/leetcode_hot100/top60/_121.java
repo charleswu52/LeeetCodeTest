@@ -28,9 +28,27 @@ public class _121 {
      * 解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
      * <p>
      * 数据范围；
-     * 树中结点数在范围 [0, 2000] 内
-     * -100 <= Node.val <= 100
-     *
-     * 进阶：你可以使用原地算法（O(1) 额外空间）展开这棵树吗？
+     * 1 <= prices.length <= 105
+     * 0 <= prices[i] <= 104
      */
+
+    /*
+    思路：一次遍历
+    遍历过程中记录股票价格的最小值，然后用当前股票价格减去之前的最小股价，然后更新最大利润，同时更新最小价格
+
+     */
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        if (n < 2) {
+            return 0;
+        }
+        int res = 0;
+        int minPrice = prices[0];
+        for (int i = 1; i < n; i++) {
+            res = Math.max(res, prices[i] - minPrice);
+            minPrice = Math.min(minPrice, prices[i]);
+        }
+        return res;
+    }
+
 }

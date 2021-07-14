@@ -1,0 +1,19 @@
+public class Test {
+
+    public static int maxProfit(int[] prices) {
+        int res = 0;
+        int len = prices.length;
+        int minPrice = prices[0];
+        for (int i = 1; i < len; i++) {
+            res= Math.max(prices[i] - minPrice,res);
+            minPrice = Math.min(prices[i], minPrice);
+        }
+        return res;
+    }
+
+
+    public static void main(String[] args) {
+        int[] prices = {1, 2, 3, 6, 7};
+        System.out.println(maxProfit(prices));
+    }
+}
