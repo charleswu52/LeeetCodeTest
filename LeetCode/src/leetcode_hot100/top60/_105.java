@@ -83,8 +83,10 @@ public class _105 {
 
         // 先建立根节点
         TreeNode root = new TreeNode(preorder[preorder_root]);
+
         // 得到左子树的节点数目
         int size_left_subtree = inorder_root - inorder_left;
+
         // 递归构造左子树
         root.left = myBuildTree(
                 preorder, inorder,
