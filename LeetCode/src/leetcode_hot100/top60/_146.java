@@ -2,7 +2,6 @@ package leetcode_hot100.top60;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * @author WuChao
@@ -55,23 +54,122 @@ public class _146 {
      * 最多调用 2 * 105 次 get 和 put
      */
 
+    /*
+    哈希表+双向链表
+    相当于是手写 LinkedHashMap
+     */
+
     class LRUCache {
 
-        int maxSize;
-        Map<Integer, Map<Integer, Integer>> cahce;
+        // 双向链表节点
+        class DLinkedNode {
+            int key;
+            int value;
+            DLinkedNode pre;
+            DLinkedNode next;
+
+            public DLinkedNode() {
+            }
+
+            public DLinkedNode(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+        }
+
+        private Map<Integer, DLinkedNode> cahce;
+        private int size;
+        private int capacity;
+        private DLinkedNode head, tail;
 
         public LRUCache(int capacity) {
-            this.maxSize = capacity;
             this.cahce = new HashMap<>();
+            this.size = 0;
+            this.capacity = capacity;
+            // 使用伪头部和伪尾部节点
+            this.head = new DLinkedNode();
+            this.tail = new DLinkedNode();
+
+            this.head.next = this.tail;
+            this.tail.pre = this.head;
+
         }
 
         public int get(int key) {
-
-
+            DLinkedNode node = cahce.get(key);
+            if (node == null) {
+                return -1;
+            }
+            // 如果 key 存在，先通过哈希表定位，再移到头部
+            moveToHead(node);
+            return node.value;
         }
 
         public void put(int key, int value) {
+            DLinkedNode node = cahce.get(key);
+            if (node == null) {
+                // 如果不存在，创建一个新的
+                DLinkedNode newNode = new DLinkedNode(key, value);
+                // 添加进哈希表
+                cahce.put(key, newNode);
+                // 添加至双向链表的头部
+                addTohead(newNode);
+                size++;
+                if (size > capacity) {
+                    // 如果超出容量，删除双向链表的尾部节点
+                    DLinkedNode tail = removeTail();
+                    // 删除哈希表中对应的项
+                    cahce.remove(tail.key);
+                    size--;
+                }
+            } else {
+                // 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部
+                node.value = value;
+                moveToHead(node);
 
+            }
+        }
+
+        /**
+         * 添加到双向链表头部
+         * @param node
+         */
+        private void addTohead(DLinkedNode node) {
+            node.pre = head;
+            node.next = head.next;
+            head.next.pre = node;
+            head.next = node;
+        }
+
+        /**
+         * 移除普通节点
+         * @param node
+         */
+        private void removeNode(DLinkedNode node) {
+            node.pre.next = node.next;
+            node.next.pre = node.pre;
+        }
+
+        /**
+         * 移动节点到头部
+         * @param node
+         */
+        private void moveToHead(DLinkedNode node) {
+            removeNode(node);
+            addTohead(node);
+        }
+
+        /**
+         * 移除尾部节点
+         * @return
+         */
+        private DLinkedNode removeTail() {
+            DLinkedNode res = tail.pre;
+            removeNode(res);
+            return res;
         }
     }
+
+
+
 }
