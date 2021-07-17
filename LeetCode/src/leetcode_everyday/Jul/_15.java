@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class _15 {
     /**
-     * 每日一题：2021/7/14
+     * 每日一题：2021/7/15
      * 1846. 减小和重新排列数组后的最大元素
      * 难度: medium
      * <p>
