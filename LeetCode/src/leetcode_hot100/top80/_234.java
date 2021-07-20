@@ -59,7 +59,24 @@ public class _234 {
             return true;
         }
 
-        return true;
+        // 找到链表中间位置，并划分
+        ListNode halfNode = halfList(head);
+        ListNode reverseNode = reverseList(halfNode.next);
+
+        // 开始判断
+        ListNode p1 = head, p2 = reverseNode;
+        boolean res = true;
+        while (res && p2 != null) {
+            if (p1.val != p2.val) {
+                res = false;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        // 将链表恢复 可选操作
+        halfNode.next = reverseList(reverseNode);
+        return res;
 
 
     }
@@ -82,11 +99,18 @@ public class _234 {
     }
 
     /**
-     *
+     * 找到链表中间位置
      * @param head
      * @return
      */
-    public ListNode cutList(ListNode head) {
+    public ListNode halfList(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
 
     }
 }
