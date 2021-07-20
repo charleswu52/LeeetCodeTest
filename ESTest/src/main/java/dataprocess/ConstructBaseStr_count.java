@@ -1,5 +1,7 @@
 package dataprocess;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
@@ -10,8 +12,12 @@ import java.util.LinkedHashMap;
  */
 public class ConstructBaseStr_count {
     public static void main(String[] args) throws Exception {
-        String path = "E:\\levelFields_oneFile\\再细分\\输出\\";
-        String outPath = "E:\\WorkSpace\\Clion\\DeltaCompress\\specialInput\\";
+
+
+
+
+        String path = "E:\\研究生学习\\ES测试\\ES实验\\logs_trans\\all16LeveCut\\";
+        String outPath = "E:\\研究生学习\\ES测试\\ES实验\\logs_trans\\all16BasicStr\\";
 
         File dir = new File(path);
         File[] files = dir.listFiles();
@@ -26,10 +32,13 @@ public class ConstructBaseStr_count {
                 int maxLen2 = Integer.MIN_VALUE;
                 String maxStr="";
                 LinkedHashMap<String, Integer> stringCount = new LinkedHashMap<>();
-                reader = new BufferedReader(new InputStreamReader(new FileInputStream(files[i]), "UTF-8"));//new BufferedReader(new FileReader());
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(files[i]), StandardCharsets.UTF_8));//new BufferedReader(new FileReader());
                 String temp = null;
                 while ((temp = reader.readLine()) != null) {
-                    String t = temp.substring(50);
+                    JSONObject jsonObject = JSONObject.parseObject(temp);
+
+                    String t = (String) jsonObject.get("caller");
+
                     stringCount.put(t, stringCount.getOrDefault(t, 0) + 1);
                     if (stringCount.get(t) > maxLen2) {
                         maxStr = temp;

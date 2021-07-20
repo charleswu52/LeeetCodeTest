@@ -2,6 +2,7 @@ package dataprocess;
 
 
 import com.alibaba.fastjson.JSONObject;
+import org.junit.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -147,12 +148,54 @@ public class CutField {
 
             }
         }
-
-
-
-
     }
 
+
+    @Test
+    public void test() {
+
+        String path = "E:\\研究生学习\\ES测试\\ES实验\\logs_trans\\1\\ES数据\\influxdb-2021-03-30T11-06-23.613.log";
+
+        File file = new File(path);
+        BufferedReader reader = null;
+        String outPath = "E:\\研究生学习\\ES测试\\ES实验\\logs_trans\\oneFileCut\\占位符\\";
+        String[] fields = {"msg", "tsm1_strategy", "op_event", "shardID", "dir", "newRss=", "path", "lockFilePath", "op_elapsed", "rss=", "tsm1_file", "level", "query", "batch", "index", "name=", "tsi1_partition", "segment.path", "ptID", "ptid", "tsm1_optimize", "datatabase", "shard id", "tsm1_index", "compactClone", "name", "tsm1_files_n", "files", "tsi1_log_file_id", "kb_per_sec", "fd", "rp", "tsi1_level", "LockFilePath", "dst", "x=", "op_name", "error", "elapsed", "partition", "file", "engine", "size=", "tsm1_level", "trace_id", "cost", "Amplifier=", "src", "openNum", "target", "caller", "service", "bytes", "time", "stmt", "db"};
+        for (String field : fields) {
+            int line = 1;
+            try {
+                StringBuffer sbf = new StringBuffer();
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_16));//new BufferedReader(new FileReader());
+                String temp = null;
+                while ((temp = reader.readLine()) != null) {
+                    JSONObject jsonObject = JSONObject.parseObject(temp);
+                    if (jsonObject.getString(field) != null) {
+//                        sbf.append(line + " " + jsonObject.getString(field) + "\n");
+                        sbf.append(jsonObject.getString(field) + "\n");
+                    } else {
+                        sbf.append("#\n");
+                    }
+                    line++;
+                }
+                reader.close();
+                File newFile = new File(outPath + field + ".txt");
+                if (!newFile.exists()) {
+                    newFile.createNewFile();
+                }
+                // 获取该文件的缓冲输出流
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile, true), StandardCharsets.UTF_8));
+                // 写入信息
+                bufferedWriter.write(sbf.toString());
+                bufferedWriter.flush();// 清空缓冲区
+                bufferedWriter.close();// 关闭输出流
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    }
 
 
 }

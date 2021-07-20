@@ -1,6 +1,7 @@
 package dataprocess;
 
 import com.alibaba.fastjson.JSONObject;
+import org.junit.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -74,4 +75,47 @@ public class CountField {
             System.out.println(s);
         }
     }
+
+    @Test
+    public void test() {
+
+        String path = "E:\\研究生学习\\ES测试\\ES实验\\logs_trans\\1\\ES数据\\influxdb-2021-03-30T11-06-23.613.log";
+
+        File file = new File(path);
+        BufferedReader reader = null;
+        int line = 1;
+        Set<String> fileds = new HashSet<>();
+        try {
+//                StringBuffer sbf = new StringBuffer();
+
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_16));//new BufferedReader(new FileReader());
+            String temp = null;
+            while ((temp = reader.readLine()) != null) {
+                JSONObject jsonObject = JSONObject.parseObject(temp);
+
+//                System.out.println(jsonObject);
+
+                Iterator<Map.Entry<String, Object>> iterator = jsonObject.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry<String, Object> next = iterator.next();
+                    String key = next.getKey();
+                    fileds.add(key);
+                }
+                line++;
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (String s : fileds) {
+            System.out.print("\""+s+"\",");
+        }
+        System.out.println();
+        System.out.println(fileds.size());
+    }
+
+
 }
