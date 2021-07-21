@@ -51,7 +51,7 @@ public class _287 {
 
     /*
     思路：快慢指针（参考环形链表）
-
+    它的思想属于 Floyd 判圈算法
     快慢指针，一个时间复杂度为O(N)的算法。
 
     其一，对于链表问题，使用快慢指针可以判断是否有环。
@@ -68,16 +68,17 @@ public class _287 {
      */
 
     public int findDuplicate(int[] nums) {
-        int res = 0;
-
-        for (int fast = 0; res != fast || fast == 0; ) {
-            res = nums[res];
+        int slow = nums[0], fast = nums[nums[0]];
+        while (slow != fast) {
+            slow = nums[slow];
             fast = nums[nums[fast]];
         }
-        for (int i = 0; i != res; i++) {
-            res = nums[res];
+        slow = 0;   //重回起点
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
         }
-        return res;
+        return slow;
 
 
 
