@@ -42,4 +42,9 @@ public class Test {
         maopao(array);
         System.out.println(Arrays.toString(array));
     }
+
+    @org.junit.Test
+    public void test() {
+
+    }
 }

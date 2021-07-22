@@ -1,5 +1,7 @@
 package jd;
 
+import org.junit.Test;
+
 /**
  * @author WuChao
  * @create 2021/7/21 18:17
@@ -19,5 +21,10 @@ public class Singleton {
             }
         }
         return singleton;
+    }
+
+    @Test
+    public void test() {
+
     }
 }
