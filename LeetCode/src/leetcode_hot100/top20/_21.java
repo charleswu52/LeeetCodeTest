@@ -51,6 +51,10 @@ public class _21 {
         }
     }
 
+    /*
+    思路：模拟着做即可
+    要在最前面定义一个新的头节点
+     */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode res = new ListNode();
         ListNode pre = null;

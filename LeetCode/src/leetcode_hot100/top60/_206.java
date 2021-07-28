@@ -28,6 +28,7 @@ public class _206 {
      * -5000 <= Node.val <= 5000
      */
 
+    // 链表节点定义
     public class ListNode {
         int val;
         ListNode next;
@@ -46,6 +47,10 @@ public class _206 {
         }
     }
 
+    /*
+    翻转链表解决思路：
+    使用双指针，记录一个当前的和之前的指针，循环即可
+     */
     public ListNode reverseList(ListNode head) {
         if (head == null) {
             return head;

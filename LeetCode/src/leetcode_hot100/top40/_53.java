@@ -24,6 +24,16 @@ public class _53 {
      * -10^5 <= nums[i] <= 10^5
      *进阶：如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的 分治法 求解。
      */
+
+    /*
+    思路：动态规划
+    dp[i] 表示以i结尾的最大子序和
+    dp[i]两种情况：
+        1.加上前一个位置的最大和: dp[i-1] +nums[i]
+        2.不加 它自己是一个新的 nums[i]
+        取两者的最大和
+
+     */
     public int maxSubArray(int[] nums) {
         int len = nums.length;
         int[] dp = new int[len];
