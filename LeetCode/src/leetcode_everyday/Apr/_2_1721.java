@@ -6,7 +6,7 @@ import org.junit.Test;
  * @author WuChao
  * @since 2021/4/2 上午8:17
  */
-public class _2 {
+public class _2_1721 {
     /**
      * 每日一题：2021/4/2
      * 面试题 17.21. 直方图的水量

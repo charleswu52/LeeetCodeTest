@@ -48,8 +48,10 @@ public class _206 {
     }
 
     /*
+    思路1：迭代
     翻转链表解决思路：
     使用双指针，记录一个当前的和之前的指针，循环即可
+
      */
     public ListNode reverseList(ListNode head) {
         if (head == null) {
@@ -64,8 +66,22 @@ public class _206 {
 
         }
         return pre;
-
-
     }
 
+    /*
+    思路2：递归
+
+     */
+    public ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = reverseList2(head.next);
+
+        head.next.next = head;
+        // 注意这一点 否则链表容易成环
+        head.next = null;
+        return newHead;
+
+    }
 }

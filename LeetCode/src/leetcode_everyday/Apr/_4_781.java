@@ -9,7 +9,7 @@ import java.util.Map;
  * @author WuChao
  * @since 2021/4/4 上午8:35
  */
-public class _4 {
+public class _4_781 {
     /**
      * 每日一题：2021/4/4
      * 781. 森林中的兔子

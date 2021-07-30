@@ -6,7 +6,7 @@ import org.junit.Test;
  * @author WuChao
  * @since 2021/4/3 上午8:54
  */
-public class _3 {
+public class _3_1143 {
     /**
      * 每日一题：2021/4/3
      * 1143. 最长公共子序列

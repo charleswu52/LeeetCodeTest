@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * @author WuChao
  * @since 2021/4/1 上午8:05
  */
-public class _1 {
+public class _1_1006 {
     /**
      * 每日一题：2021/4/1
      * 1006. 笨阶乘

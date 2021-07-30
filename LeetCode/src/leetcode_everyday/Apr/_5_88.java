@@ -4,7 +4,7 @@ package leetcode_everyday.Apr;
  * @author WuChao
  * @since 2021/4/5 下午3:41
  */
-public class _5 {
+public class _5_88 {
     /**
      * 每日一题：2021/4/5
      * 88. 合并两个有序数组
@@ -28,6 +28,9 @@ public class _5 {
      * -109 <= nums1[i], nums2[i] <= 109
      */
 
+    /*
+    思路：直接合并到一个数组中
+     */
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int i = 0, j = 0;
         while (i < m && j < n) {
