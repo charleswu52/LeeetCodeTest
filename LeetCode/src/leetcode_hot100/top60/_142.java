@@ -68,7 +68,6 @@ public class _142 {
             slow = slow.next;
             if (fast.next != null) {
                 fast = fast.next.next;
-
             } else {
                 return null;
             }

@@ -7,7 +7,7 @@ import java.util.List;
  * @author WuChao
  * @since 2021/3/5 上午8:27
  */
-public class _5 {
+public class _5_232 {
     /**
      * 每日一题：2021/3/5
      * 232. 用栈实现队列

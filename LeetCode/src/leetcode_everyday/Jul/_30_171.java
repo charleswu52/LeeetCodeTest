@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class _30_171 {
     /**
-     * 每日一题：2021/7/29
+     * 每日一题：2021/7/30
      * 171. Excel表列序号
      * 难度: easy
      * <p>

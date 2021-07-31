@@ -4,7 +4,7 @@ package leetcode_everyday.Mar;
  * @author WuChao
  * @since 2021/3/18 上午7:54
  */
-public class _18 {
+public class _18_92 {
     /**
      * 每日一题：2021/3/18
      * 92. 反转链表 II

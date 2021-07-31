@@ -7,7 +7,7 @@ import java.util.List;
  * @author WuChao
  * @since 2021/3/15 上午7:37
  */
-public class _15 {
+public class _15_54 {
     /**
      * 每日一题：2021/3/15
      * 54. 螺旋矩阵
