@@ -44,16 +44,4 @@ public class _24 {
         return listNodeList.get(listNodeList.size() - 1);
     }
 
-    public ListNode reverseList2(ListNode head) {
-        // 迭代的方式，存储前一个节点
-        ListNode pre = null;
-        ListNode curr = head;
-        while (curr != null) {
-            ListNode next = curr.next;
-            curr.next = pre;
-            pre = curr;
-            curr = next;
-        }
-        return pre;
-    }
 }
