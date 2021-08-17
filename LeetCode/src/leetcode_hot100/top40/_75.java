@@ -227,7 +227,7 @@ public class _75 {
         }
         //标记，从高指针开始，还是低指针（默认高指针）
         boolean flag = true;
-        //记录指针的其实位置
+        //记录指针的起始位置
         int start = low;
         int end = high;
         //默认中间值为低指针的第一个值

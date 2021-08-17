@@ -14,8 +14,6 @@ public class _146 {
      * 146. LRU 缓存机制
      * 难度：medium
      * <p>
-     * 给定一个链表，判断链表中是否有环。
-     * <p>
      * 运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制 。
      * <p>
      * 实现 LRUCache 类：
@@ -57,27 +55,30 @@ public class _146 {
     /*
     哈希表+双向链表
     相当于是手写 LinkedHashMap
+
+    注意采用泛型写法
      */
 
-    class LRUCache {
+    class LRUCache<K,V> {
 
         // 双向链表节点
         class DLinkedNode {
-            int key;
-            int value;
+            // 必须存 key 为了删除用
+            K key;
+            V value;
             DLinkedNode pre;
             DLinkedNode next;
 
             public DLinkedNode() {
             }
 
-            public DLinkedNode(int key, int value) {
+            public DLinkedNode(K key, V value) {
                 this.key = key;
                 this.value = value;
             }
         }
 
-        private Map<Integer, DLinkedNode> cahce;
+        private Map<K, DLinkedNode> cahce;
         private int size;
         private int capacity;
         private DLinkedNode head, tail;
@@ -95,17 +96,17 @@ public class _146 {
 
         }
 
-        public int get(int key) {
+        public V get(K key) {
             DLinkedNode node = cahce.get(key);
             if (node == null) {
-                return -1;
+                return null;
             }
             // 如果 key 存在，先通过哈希表定位，再移到头部
             moveToHead(node);
             return node.value;
         }
 
-        public void put(int key, int value) {
+        public void put(K key, V value) {
             DLinkedNode node = cahce.get(key);
             if (node == null) {
                 // 如果不存在，创建一个新的

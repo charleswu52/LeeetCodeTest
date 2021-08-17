@@ -38,7 +38,7 @@ public class _15 {
     思路： 排序+双指针
     先将原数组排序
     固定3个指针中最左(小)数字的指针k，双指针i，j分别设在数组索引(k,len(nums))两端，通过双指针交替向中间移动，记录对于每个固定指针k的所有满足
-    nums[i] + nums[j] + nums[k] = 0 的i,j,k的组合：
+    nums[k] + nums[i] + nums[j] = 0 的i,j,k的组合：
         1. 当 nums[k] > 0 时直接 break 跳出
         2. 当 nums[k] == nums[k-1]时 跳过该元素，因为已经将 nums[k-1]的所有组合加入到结果中
         3. i, j 分别设在 ( k,len(nums) ) 两端，当 i < j 时循环计算 s = nums[k] + nums[i] + nums[j]

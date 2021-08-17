@@ -63,7 +63,6 @@ public class _206 {
             cur.next = pre;
             pre = cur;
             cur = node;
-
         }
         return pre;
     }
