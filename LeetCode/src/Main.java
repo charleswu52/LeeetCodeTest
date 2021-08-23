@@ -1,66 +1,45 @@
 import leetcode_everyday.Mar.*;
 
-import java.awt.*;
-import java.lang.reflect.Field;
+import java.util.Scanner;
+
 
 public class Main {
-
-    private static int j = 0;
-
-    private static boolean mb(int k) {
-        j += k;
-        return true;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] strings = scanner.nextLine().split(" ");
+        int n = strings.length;
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = Integer.parseInt(strings[i]);
+        }
+        int target = Integer.parseInt(scanner.nextLine());
+        int[] res = searchRange(nums, target);
+        System.out.println(res[0] + " " + res[1]);
     }
 
-    public static void ma(int i) {
-        boolean b;
-        b = i < 10 | mb(4);
-        b = i < 10 || mb(8);
+    public static int[] searchRange(int[] nums, int target) {
+        int leftIdx = binarySearch(nums, target, true);
+        int rightIdx = binarySearch(nums, target, false) - 1;
+        if (leftIdx <= rightIdx && rightIdx < nums.length && nums[leftIdx] == target && nums[rightIdx] == target) {
+            return new int[]{leftIdx, rightIdx};
+        }
+        return new int[]{-1, -1};
     }
-    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
-        Class classs = Class.class.getClass();
-        Object o = Object.class.getClass();
-        System.out.println(classs==o);
-        System.out.println(classs.getClass()==o.getClass());
 
+    public static int binarySearch(int[] nums, int target, boolean lower) {
+        int left = 0, right = nums.length - 1, ans = nums.length;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] > target || (lower && nums[mid] >= target)) {
+                right = mid - 1;
+                ans = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
     }
-//        String s = new String("abc");
-//        System.out.println(s);
-//        Field value = s.getClass().getDeclaredField("value");
-////        value.setAccessible(true);
-////        value.set(s, "abcd".toCharArray());
-////
-////
-////        System.out.println(s);
-//        int[] nums = {1, 3, 5, 5, 5, 5, 5, 5, 7, 2, 0};
-//        System.out.println(maxnum(nums));
-//    }
-//
-//    public  static int maxnum(int[] nums){
-//        int i =0 ;
-//        int j = nums.length - 1;
-//        int res;
-//        while (i <= j) {
-//            int mid = (i + j) / 2;
-//            int left = mid;
-//            while (nums[left] == nums[mid] && left > 0) {
-//                left--;
-//            }
-//            int right = mid;
-//            while (nums[right] == nums[mid] && right < nums.length - 1) {
-//                right++;
-//            }
-//            if (nums[mid] >= nums[left] && nums[mid] <= nums[right]) {
-//                i = right;
-//            } else if (nums[mid] <= nums[left] && nums[mid] >= nums[right]) {
-//                j = left;
-//            } else {
-//                res = nums[mid];
-//                return res;
-//            }
-//        }
-//        return -1;
-//    }
+
 
 
 

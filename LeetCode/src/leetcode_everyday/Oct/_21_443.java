@@ -4,7 +4,7 @@ package leetcode_everyday.Oct;
  * @author WuChao
  * @create 2021/8/21 9:37
  */
-public class _21 {
+public class _21_443 {
     /**
      * 每日一题：2021/8/21
      * 443. 压缩字符串
