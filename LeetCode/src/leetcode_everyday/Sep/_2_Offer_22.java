@@ -6,7 +6,7 @@ package leetcode_everyday.Sep;
  */
 public class _2_Offer_22 {
     /**
-     * 每日一题：2021/9/1
+     * 每日一题：2021/9/2
      * 剑指 Offer 22. 链表中倒数第k个节点
      * 难度：easy
      * <p>
