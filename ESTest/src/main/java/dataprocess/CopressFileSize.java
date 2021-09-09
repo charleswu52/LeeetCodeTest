@@ -16,17 +16,17 @@ public class CopressFileSize {
 
         String outPath = "E:\\研究生学习\\ES测试\\ES实验\\logs_trans\\all16LevelCompress\\";
 
-        File dir = new File(logs);
-        File[] files = dir.listFiles();
-        for (int i = 0; i < files.length; i++) {
-            System.out.println(files[i].getName());
-            File myPath = new File(outPath + files[i].getName());
-            if ( !myPath.exists()){//若此目录不存在，则创建之
-                myPath.mkdir();
+        String listFiles = "/home/charles/IdeaProject/lucene-main/lucene/demo/resources/input/datasource15";
+        String listFiles2 = "/home/charles/IdeaProject/lucene-main/lucene/demo/resources/output/indexPath15";
 
-            }
+        File dir = new File(listFiles2);
+        File[] files = dir.listFiles();
+        int sum = 0;
+        for (int i = 0; i < files.length; i++) {
+            sum += files[i].length();
 
         }
+        System.out.println(sum);
     }
 
 }
