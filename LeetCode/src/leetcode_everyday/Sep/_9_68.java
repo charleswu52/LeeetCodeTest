@@ -94,7 +94,7 @@ public class _9_68 {
             }
             // 当前行是最后一行：单词左对齐，且单词之间应只有一个空格，在行末填充剩余空格
             if (right == n) {
-                StringBuffer stringBuffer = new StringBuffer();
+                StringBuffer stringBuffer = join(words, left, n, " ");
                 stringBuffer.append(blank(maxWidth - stringBuffer.length()));
                 ans.add(stringBuffer.toString());
                 return ans;
@@ -105,7 +105,7 @@ public class _9_68 {
             // 当前行只有一个单词：该单词左对齐，在行末填充剩余空格
             if (numWords == 1) {
                 StringBuffer stringBuffer = new StringBuffer(words[left]);
-                stringBuffer.append(numSpaces);
+                stringBuffer.append(blank(numSpaces));
                 ans.add(stringBuffer.toString());
                 continue;
             }
