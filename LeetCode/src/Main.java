@@ -2,23 +2,46 @@ import leetcode_everyday.Mar.*;
 import sun.rmi.runtime.Log;
 
 import java.io.Console;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String[] strings = scanner.nextLine().split(" ");
-        int n = strings.length;
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i] = Integer.parseInt(strings[i]);
+    public static void main(String[] args)throws Exception {
+//        Scanner scanner = new Scanner(System.in);
+//        String[] strings = scanner.nextLine().split(" ");
+//        int n = strings.length;
+//        int[] nums = new int[n];
+//        for (int i = 0; i < n; i++) {
+//            nums[i] = Integer.parseInt(strings[i]);
+//        }
+//        int target = Integer.parseInt(scanner.nextLine());
+//        int[] res = searchRange(nums, target);
+//        System.out.println(res[0] + " " + res[1]);
+        try {
+            Class<?> aClass = ClassLoader.getSystemClassLoader().loadClass("Test");
+            System.out.println("A");
+            Object inst = aClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        int target = Integer.parseInt(scanner.nextLine());
-        int[] res = searchRange(nums, target);
-        System.out.println(res[0] + " " + res[1]);
+
+//        Constructor constructor = (Constructor) Dog.class.getConstructor();
+//        Dog dog = (Dog) constructor.newInstance();
+//        dog.getName();
+
+//        Constructor constructor1 = (Constructor) Dog.class.getConstructor(String.class);
+//        Dog dog1 = (Dog) constructor1.newInstance("有参");
+//        dog1.getName();
+
+//        Dog dog2 = (Dog) Dog.class.newInstance();
+//        dog2.getName();
+
+//        Constructor constructor2 = (Constructor) Dog.class.getConstructor(Number.class);
+//        Dog dog3 = (Dog) constructor2.newInstance("有参");
+//        dog3.getName();
     }
 
     public static int[] searchRange(int[] nums, int target) {
@@ -122,4 +145,29 @@ public class Main {
     }
 
 
+}
+
+class Test{
+    static {
+        System.out.println("B");
+    }
+    public Test() {
+        System.out.println("c");
+    }
+    {
+        System.out.println("D");
+    }
+}
+
+class  Dog{
+    public Dog() {
+        System.out.println("无参构造");
+    }
+
+    public Dog(String meg) {
+        System.out.println(meg);
+    }
+    public void getName() {
+        System.out.println("柴犬");
+    }
 }
