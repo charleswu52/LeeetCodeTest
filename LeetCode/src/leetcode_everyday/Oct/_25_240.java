@@ -6,7 +6,7 @@ package leetcode_everyday.Oct;
  */
 public class _25_240 {
     /**
-     * 每日一题：2021/10/24
+     * 每日一题：2021/10/25
      * <p>
      * 240. 搜索二维矩阵 II
      * <p>
