@@ -1,9 +1,6 @@
 package loggingprocess;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -12,9 +9,8 @@ import java.nio.charset.StandardCharsets;
  * @author WuChao
  * @create 2021/10/28 19:48
  */
-public class CutFields {
-
-    // 提取 request 并按照 ES 分词算法进行分词
+public class CutFieldsWithoutToken {
+    // 提取 request 不分词
     public static void main(String[] args) throws Exception {
         String filePath = "E:\\研究生学习\\华为压缩索引检索项目\\ESRally数据\\logging\\解压数据\\documents-191998.json\\input\\";
         File file = new File(filePath);
@@ -33,17 +29,7 @@ public class CutFields {
                 id++;
                 JSONObject jsonObject = JSONObject.parseObject(temp);
                 Object value = jsonObject.get("request");
-                StandardAnalyzer analyzer = new StandardAnalyzer();
-                TokenStream tokenStream = analyzer.tokenStream("", value.toString());
-                CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-                tokenStream.reset();
-                String trans = "";
-                while (tokenStream.incrementToken()) {
-                    trans += charTermAttribute.toString()+" ";
-                }
-                tokenStream.close();
-
-                File newFile = new File(outPath + "request.txt");
+                File newFile = new File(outPath + "request2.txt");
                 if (!newFile.exists()) {
                     newFile.createNewFile();
                 }
@@ -51,11 +37,12 @@ public class CutFields {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(newFile, true), StandardCharsets.UTF_8));
                 // 写入信息
-                bufferedWriter.write(trans + "\n");
+                bufferedWriter.write(value + "\n");
                 bufferedWriter.flush();// 清空缓冲区
                 bufferedWriter.close();// 关闭输出流
 
                 System.out.println(id);
+
             }
 
         }
@@ -63,6 +50,7 @@ public class CutFields {
 
     }
 }
+
 
 
 

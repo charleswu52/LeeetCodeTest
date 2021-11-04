@@ -8,18 +8,17 @@ import java.util.*;
  * @author WuChao
  * @create 2021/10/29 8:19
  */
-public class TokenGram {
-    // 统计 N-token gram
+public class TokenGram2 {
+    // 统计 N-token gram  每个出现几次算几次
     public static void main(String[] args) throws Exception {
         String filePath = "E:\\研究生学习\\华为压缩索引检索项目\\ESRally数据\\logging\\解压数据\\documents-191998.json\\output" +
                 "\\request.txt";
         String outputPath = "E:\\研究生学习\\华为压缩索引检索项目\\ESRally数据\\logging\\解压数据\\documents-191998.json\\output" +
-                "\\grams\\tokengram\\";
+                "\\grams\\tokengram2\\";
         File file = new File(filePath);
         BufferedReader reader = null;
         String temp = null;
-        HashMap<String,Set<Integer>> invertList = null;
-
+        HashMap<String,Long> invertList = null;
         int N;
         for (N = 1; N < 7; N++) {
             reader = new BufferedReader(new InputStreamReader(
@@ -40,28 +39,27 @@ public class TokenGram {
                     }
                     String key = sb.toString();
                     if (invertList.containsKey(key)) {
-                        invertList.get(key).add(line);
-                    } else {
-                        Set<Integer> set = new HashSet<>();
-                        set.add(line);
-                        invertList.put(key, set);
+                        Long aLong = invertList.get(key);
+                        if (aLong  == Long.MAX_VALUE) {
+                            System.out.println("ERROR");
+                        }
                     }
-                }
-                System.out.println(line);
+                    invertList.put(key, invertList.getOrDefault(key, 0L) + 1);
 
+                }
 //                break;
             }
             reader.close();
 
             // 按照value降序排序
             //这里将map.entrySet()转换成list
-            List<Map.Entry<String,Set<Integer>>> list = new ArrayList<Map.Entry<String,Set<Integer>>>(invertList.entrySet());
+            List<Map.Entry<String,Long>> list = new ArrayList<Map.Entry<String,Long>>(invertList.entrySet());
             //然后通过比较器来实现排序
-            Collections.sort(list, new Comparator<Map.Entry<String, Set<Integer>>>() {
+            Collections.sort(list, new Comparator<Map.Entry<String, Long>>() {
                 @Override
-                public int compare(Map.Entry<String, Set<Integer>> o1, Map.Entry<String, Set<Integer>> o2) {
+                public int compare(Map.Entry<String, Long> o1, Map.Entry<String, Long> o2) {
                     // 按照set大小降序排序
-                    return o2.getValue().size() - o1.getValue().size();
+                    return o2.getValue().compareTo(o1.getValue());
                 }
             });
 
@@ -81,11 +79,11 @@ public class TokenGram {
             BufferedWriter bufferedWriter2 = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(newFile2, true), StandardCharsets.UTF_8));
 
-            for(Map.Entry<String,Set<Integer>> mapping:list){
+            for(Map.Entry<String,Long> mapping:list){
                 // 写入信息
-                bufferedWriter1.write(mapping.getValue().size() + "\n");
+                bufferedWriter1.write(mapping.getValue() + "\n");
                 bufferedWriter1.flush();// 清空缓冲区
-                bufferedWriter2.write(mapping.getKey() + ":" + mapping.getValue().size() + "\n");
+                bufferedWriter2.write(mapping.getKey() + ":" + mapping.getValue() + "\n");
                 bufferedWriter2.flush();// 清空缓冲区
             }
             bufferedWriter1.close();// 关闭输出流
