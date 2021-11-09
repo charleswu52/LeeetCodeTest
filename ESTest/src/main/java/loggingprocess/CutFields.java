@@ -1,9 +1,6 @@
 package loggingprocess;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -33,15 +30,15 @@ public class CutFields {
                 id++;
                 JSONObject jsonObject = JSONObject.parseObject(temp);
                 Object value = jsonObject.get("request");
-                StandardAnalyzer analyzer = new StandardAnalyzer();
-                TokenStream tokenStream = analyzer.tokenStream("", value.toString());
-                CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-                tokenStream.reset();
                 String trans = "";
-                while (tokenStream.incrementToken()) {
-                    trans += charTermAttribute.toString()+" ";
-                }
-                tokenStream.close();
+//                StandardAnalyzer analyzer = new StandardAnalyzer();
+//                TokenStream tokenStream = analyzer.tokenStream("", value.toString());
+//                CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+//                tokenStream.reset();
+//                while (tokenStream.incrementToken()) {
+//                    trans += charTermAttribute.toString()+" ";
+//                }
+//                tokenStream.close();
 
                 File newFile = new File(outPath + "request.txt");
                 if (!newFile.exists()) {

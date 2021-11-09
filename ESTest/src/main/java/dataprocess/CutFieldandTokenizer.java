@@ -2,12 +2,11 @@ package dataprocess;
 
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+
+//import org.apache.lucene.analysis.standard.StandardAnalyzer;
 
 /**
  * @author WuChao
@@ -128,16 +127,16 @@ public class CutFieldandTokenizer {
                         if (jsonObject.getString(field) != null) {
 //                            System.out.println(line + "," + jsonObject.getString(field));
                             String temps = jsonObject.getString(field);
-                            StandardAnalyzer analyzer = new StandardAnalyzer();
-                            TokenStream tokenStream = analyzer.tokenStream("", temps);
-                            CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-                            tokenStream.reset();
                             String trans = "";
-                            while (tokenStream.incrementToken()) {
-                                trans += charTermAttribute.toString() + " ";
-//                                System.out.print(charTermAttribute.toString()+" ");
-                            }
-                            tokenStream.close();
+//                            StandardAnalyzer analyzer = new StandardAnalyzer();
+//                            TokenStream tokenStream = analyzer.tokenStream("", temps);
+//                            CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+//                            tokenStream.reset();
+//                            while (tokenStream.incrementToken()) {
+//                                trans += charTermAttribute.toString() + " ";
+////                                System.out.print(charTermAttribute.toString()+" ");
+//                            }
+//                            tokenStream.close();
 
                             sbf.append(line + " " + trans + "\n");
                         }
