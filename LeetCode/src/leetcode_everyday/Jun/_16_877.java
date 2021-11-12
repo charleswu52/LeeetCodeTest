@@ -4,7 +4,7 @@ package leetcode_everyday.Jun;
  * @author WuChao
  * @create 2021/6/16 8:41
  */
-public class _16 {
+public class _16_877 {
     /**
      * 每日一题：2021/6/16
      * 877. 石子游戏
@@ -92,7 +92,27 @@ public class _16 {
         return dp[0][len - 1] > 0;
 
     }
-}
+
+    /*
+    思路3：区间dp
+    思路：参考宫水千叶的题解
+    https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&mid=2247489400&idx=1&sn=0b629d3669329a6bf4f6ec71c2571ce7&chksm=fd9cbc67caeb357132fe0a1ca6240e2183748d94039100f539193d3eeb1dc223e0ddd4aa9584&token=2094656911&lang=zh_CN#rd
+     */
+    public boolean stoneGame3(int[] piles) {
+        int length = piles.length;
+        int[][] f = new int[length + 2][length + 2];
+        for (int len = 1; len <= length; len++) { // 枚举区间长度
+            for (int left = 1; left + len - 1 <= length; left++) { // 枚举左端点
+                int right = left + len - 1;// 计算右端点
+                int a = piles[left - 1] - f[left + 1][right];
+                int b = piles[right - 1] - f[left][right - 1];
+                f[left][right] = Math.max(a, b);
+            }
+        }
+        return f[1][length] > 0;
+    }
+
+    }
 
 
 
