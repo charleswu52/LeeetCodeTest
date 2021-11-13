@@ -13,21 +13,24 @@ public class _13_520 {
      * 难度：easy
      * <p>
      * 我们定义，在以下情况时，单词的大写用法是正确的：
-     *
+     * <p>
      * 全部字母都是大写，比如 "USA" 。
      * 单词中所有字母都不是大写，比如 "leetcode" 。
-     * 如果单词不只含有一个字母，只有首字母大写， 比如 "Google" 。
+     * 如果单词不只含有一个字母，只有首字母大写， 比如 "Google" 。
      * 给你一个字符串 word 。如果大写用法正确，返回 true ；否则，返回 false 。
      *
      * <p>
-     * 示例1：
+     * 示例 1：
      * <p>
-     * 输入: n = 3, k = 0
+     * 输入：word = "USA"
      * <p>
-     * 输出: 1
+     * 输出：true
      * <p>
-     * 解释:
-     * 只有数组 [1,2,3] 包含了从1到3的整数并且正好拥有 0 个逆序对。
+     * 示例 2：
+     * <p>
+     * 输入：word = "FlaG"
+     * <p>
+     * 输出：false
      * <p>
      * 范围
      * <p>
@@ -45,7 +48,7 @@ public class _13_520 {
         }
         boolean first = (int) word.charAt(0) >= 97;
         boolean second = (int) word.charAt(1) >= 97;
-        if (first&&!second)
+        if (first && !second)
             return false;
         for (int i = 2; i < len; i++) {
             boolean temp = (int) word.charAt(i) >= 97;
