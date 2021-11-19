@@ -10,16 +10,16 @@ import java.nio.charset.StandardCharsets;
 public class GenJson {
     // 将logging数据生成json导入到ES
     public static void main(String[] args) throws Exception {
-        String path = "ESTest/src/main/resources/logging/input_add_vgram/";
+        String path = "ESTest/src/main/resources/logging/input_token/";
         File file = new File(path);
         File[] tempList = file.listFiles();
         BufferedReader reader = null;
-        String outPath = "ESTest/src/main/resources/logging/output_add_vgram/";
-        String type = "logging_vgram_";
-        long line = 5001L;
+        String outPath = "ESTest/src/main/resources/logging/output_token/";
+        String type = "logging_token_";
         for (int i = 0; i < tempList.length; i++) {
+            long line = 1L;
             String fileName = type + tempList[i].getName().split("\\.")[0];
-            String content = "logging_vgram_5000";
+            String content = "logging_token_5000000";
             System.out.println(fileName);
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(tempList[i]), StandardCharsets.UTF_8));//new BufferedReader(new FileReader());
             String temp = null;
