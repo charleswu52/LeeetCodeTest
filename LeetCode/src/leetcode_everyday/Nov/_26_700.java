@@ -64,7 +64,6 @@ public class _26_700 {
     /*
     思路2：迭代
      */
-
     public TreeNode searchBST2(TreeNode root, int val) {
         while (root != null) {
             if (root.val == val) {
