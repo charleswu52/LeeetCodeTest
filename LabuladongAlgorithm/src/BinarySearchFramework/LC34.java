@@ -1,5 +1,9 @@
 package BinarySearchFramework;
 
+import sun.applet.Main;
+
+import java.util.Arrays;
+
 /**
  * @author WuChao
  * @since 2021/4/7 上午10:54
@@ -23,7 +27,7 @@ public class LC34 {
      *
      */
 
-    public int[] searchRange(int[] nums, int target) {
+    public static int[] searchRange(int[] nums, int target) {
         if (nums.length < 1) {
             return new int[]{-1, -1};
         }
@@ -58,6 +62,12 @@ public class LC34 {
 
 
 
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {};
+        int target = 8;
+        System.out.println(Arrays.toString(searchRange(nums, target)));
     }
 
 }
