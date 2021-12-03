@@ -15,7 +15,7 @@ public class _28_438 {
      * 难度：medium
      * <p>
      * 给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
-     *
+     * <p>
      * 异位词 指由相同字母重排列形成的字符串（包括相同的字符串）。
      * <p>
      * 示例 1：
@@ -31,7 +31,7 @@ public class _28_438 {
      * s 和 p 仅包含小写字母
      */
     /*
-    思路：
+    思路：滑动窗口
      */
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> res = new ArrayList<>();
@@ -43,7 +43,7 @@ public class _28_438 {
         int[] freq_p = new int[26];
         for (int i = 0; i < p.length(); i++) {
             freq_p[p.charAt(i) - 'a']++;
-            freq_s[s.charAt(++right)- 'a']++;
+            freq_s[s.charAt(++right) - 'a']++;
         }
         if (Arrays.equals(freq_s, freq_p)) {
             res.add(left);
