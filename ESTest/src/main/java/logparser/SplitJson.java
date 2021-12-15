@@ -27,26 +27,7 @@ public class SplitJson {
         Set<String> stringSet = new HashSet<>();
         while ((temp = reader.readLine()) != null) {
             id++;
-            JSONObject jsonObject = JSONObject.parseObject(temp, Feature.OrderedField); // 按照 json 原先的顺序解析
-            Iterator<Map.Entry<String, Object>> iterator = jsonObject.entrySet().iterator();
-            StringBuilder fieldValues = new StringBuilder();
-            int idx = 0;
-            while (iterator.hasNext()) {
-                Map.Entry<String, Object> next = iterator.next();
-                String fieldVal = String.valueOf(next.getValue());
-                if (idx == 1) {
-                    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH);
-                    fieldValues.append(date.parse(fieldVal).getTime()+" ");
-                }else if (idx == 2) {
-                    fieldValues.append(fieldVal + ": ");
-                } else {
-                    fieldValues.append(fieldVal + " ");
-                }
-                idx++;
-            }
-
-
-
+            String fieldValues = splitJson(temp);
             File newFile = new File(outputPath + "influxdb2_test.log");
             if (!newFile.exists()) {
                 newFile.createNewFile();
@@ -64,5 +45,27 @@ public class SplitJson {
         reader.close();
 
 
+    }
+
+    public static String splitJson(String log)throws Exception {
+        JSONObject jsonObject = JSONObject.parseObject(log, Feature.OrderedField); // 按照 json 原先的顺序解析
+        Iterator<Map.Entry<String, Object>> iterator = jsonObject.entrySet().iterator();
+        StringBuilder fieldValues = new StringBuilder();
+        int idx = 0;
+        while (iterator.hasNext()) {
+            Map.Entry<String, Object> next = iterator.next();
+            String fieldVal = String.valueOf(next.getValue());
+            if (idx == 1) {
+                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH);
+                fieldValues.append(date.parse(fieldVal).getTime()+" ");
+            }else if (idx == 2) {
+                fieldValues.append(fieldVal + ": ");
+            } else {
+                fieldValues.append(fieldVal + " ");
+            }
+            idx++;
+        }
+
+        return fieldValues.toString();
     }
 }
