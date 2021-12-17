@@ -1,6 +1,7 @@
 package logparser;
 
 import com.csvreader.CsvReader;
+import logdelta.core.Delta_Test;
 import org.junit.Test;
 
 import java.io.*;
@@ -13,48 +14,52 @@ import java.util.Map;
  * @create 2021/12/13 下午9:13
  */
 public class VerifyResult {
-    static String method = "Drain_result";
+    static String method = "Drain_result3";
     static String filePath = "/InfluxDB";
-    static String fileName = "/InfluxDB/InfluxDB";
+    static String fileName = "/influxdb2_test";
 
     public static void main(String[] args) throws Exception {
 
         // 聚类 csv 文件
         String resultPath = "/home/charles/WorkSpace/logparser/myresult/" +
-                method +fileName+
+                method + fileName +
                 ".log_structured.csv";
         // 验证输出文件夹
         String verifyPath = "/home/charles/WorkSpace/logparser/myresult/" +
-                method +filePath+
+                method +
                 "/clusterFiles/";
 
         // 统计出basicStr
         String basicFilePath = "/home/charles/WorkSpace/logparser/myresult/" +
-                method +filePath+
+                method +
                 "/basicStrFiles/";
 
         // 压缩后的文件存放的路径
-        String compressedFilePath ="/home/charles/WorkSpace/logparser/myresult/" +
-                method +filePath+
+        String compressedFilePath = "/home/charles/WorkSpace/logparser/myresult/" +
+                method +
                 "/compressedFiles/";
 
 
         // 原始文件
         String logFilePath = "/media/charles/My Passport/Work/CompressData/exampleData/" +
-                "InfluxDB_Origin.log";
+                "influxdb-2021-03-30T11-06-23.613.log";
 
         System.out.println("Start Clustering...");
-        verifyCluster(resultPath, verifyPath, logFilePath);
+//        verifyCluster(resultPath, verifyPath, logFilePath);
         System.out.println("Clustering Successful！");
 
         System.out.println("Start count basic string...");
-        countBasicStr(verifyPath,basicFilePath);
+//        countBasicStr(verifyPath, basicFilePath);
         System.out.println("Counting Successful！");
 
 
         System.out.println("Start Compressed...");
         generateCompressedFilePath(compressedFilePath);
+        callDelta();
         System.out.println("Compressing Successful！");
+
+        // 计算压缩后的文件大小
+
 
     }
 
@@ -165,38 +170,66 @@ public class VerifyResult {
         File file1 = new File(clusterFilePath);
         File[] files = file1.listFiles();
         for (File f : files) {
-            System.out.println("\""+f.getPath()+"\",");
+            System.out.println("\"" + f.getPath() + "\",");
         }
 
         System.out.println("BasicStr FileNames:");
         File file2 = new File(basicStrFilePath);
         for (File f : files) {
-            System.out.println("\""+file2.getPath()+"/"+f.getName()+".raw\",");
+            System.out.println("\"" + file2.getPath() + "/" + f.getName() + ".raw\",");
 
         }
 
         System.out.println("Compress FileNames:");
         File file3 = new File(compressFilePath);
         for (File f : files) {
-            System.out.println("\""+file3.getPath()+"/"+f.getName()+".dlt\",");
+            System.out.println("\"" + file3.getPath() + "/" + f.getName() + ".dlt\",");
         }
     }
 
 
     @Test
-    public  void test() {
+    public void test() {
         String a = "/home/charles/WorkSpace/logparser/myresult/" +
-                method +filePath+
+                method +
                 "/basicStrFiles";
         String b = "/home/charles/WorkSpace/logparser/myresult/" +
-                method +filePath+
+                method +
                 "/clusterFiles";
         String c = "/home/charles/WorkSpace/logparser/myresult/" +
-                method +filePath+
+                method +
                 "/compressedFiles";
         System.out.println(method);
-        printFileName(a,b,c);
-        calculateSize(b,a,c);
+        printFileName(a, b, c);
+        calculateSize(b, a, c);
+    }
+
+
+    /*
+    调用delta方法进行压缩
+     */
+    public static void callDelta()throws Exception {
+        String basicStrFiles = "/home/charles/WorkSpace/logparser/myresult/" +
+                method +
+                "/basicStrFiles";
+        String clusterFiles = "/home/charles/WorkSpace/logparser/myresult/" +
+                method +
+                "/clusterFiles";
+        String compressedFiles = "/home/charles/WorkSpace/logparser/myresult/" +
+                method +
+                "/compressedFiles";
+
+        File file1 = new File(clusterFiles);
+        File file2 = new File(basicStrFiles);
+        File file3 = new File(compressedFiles);
+        File[] files = file1.listFiles();
+        for (File f : files) {
+            String logFile = f.getPath();
+            String basicFile = file2.getPath() + "/" + f.getName() + ".raw";
+            String compressFile = file3.getPath() + "/" + f.getName() + ".dlt";
+            Delta_Test.processDelta(logFile,basicFile,compressFile);
+        }
+
     }
 
     /*
@@ -210,8 +243,8 @@ public class VerifyResult {
         long compressLen = getFileSize(compressedFiles);
         int compress = new File(compressedFiles).listFiles().length;
         long totalSize = compressLen + basicLen;
-        System.out.println("聚类文件大小：" + clusterLen+",聚类文件数量："+clusters);
-        System.out.println("压缩后文件大小：" + compressLen+",压缩文件数量："+compress);
+        System.out.println("聚类文件大小：" + clusterLen + ",聚类文件数量：" + clusters);
+        System.out.println("压缩后文件大小：" + compressLen + ",压缩文件数量：" + compress);
         System.out.println("压缩后文件大小(加basic)：" + totalSize);
 
     }
@@ -223,7 +256,7 @@ public class VerifyResult {
         if (f.exists() && f.isDirectory()) {//文件夹存在
             //获取文件夹的文件的集合
             File[] files = f.listFiles();
-            long count =0;//用来保存文件的长度
+            long count = 0;//用来保存文件的长度
             for (File file1 : files) {//遍历文件集合
                 if (file1.isFile()) {//如果是文件
                     count += file1.length();//计算文件的长度
@@ -233,7 +266,7 @@ public class VerifyResult {
 
             }
             return count;
-        }else {
+        } else {
             System.out.println("您查询的文件夹有误");
             return 0;
         }
