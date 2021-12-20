@@ -11,10 +11,7 @@ import logdelta.util.Tools;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 日志压缩的类
@@ -183,7 +180,8 @@ public class LogCompress {
         Output output = new Output(new FileOutputStream(file, true));
         Kryo kryo = new Kryo();
         // TODO 待思考
-        kryo.register(GramInvertedLists.class);
+        kryo.register(BitSet.class);
+        kryo.register(char[].class);
 
         Map<Integer, List<Pair<Integer, BitSet>>> gramListMap = this.mGramInvertedList.getGramListMap();
         int mbfSize = mBaseFile.length();
@@ -202,11 +200,27 @@ public class LogCompress {
         kryo.writeObject(output, mDeltaNum);
 
         // 写倒排 TODO 待思考 序列化方式
-        kryo.writeObject(output, gramListMap);
-
+        Iterator<Map.Entry<Integer, List<Pair<Integer, BitSet>>>> iterator = gramListMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, List<Pair<Integer, BitSet>>> next = iterator.next();
+            Integer key = next.getKey();
+            kryo.writeObject(output, key);
+            List<Pair<Integer, BitSet>> value = next.getValue();
+            int size = value.size();
+            kryo.writeObject(output, size);
+            for (int i = 0; i < size; i++) {
+                Integer key1 = value.get(i).getKey();
+                BitSet value1 = value.get(i).getValue();
+                kryo.writeObject(output, key1);
+                kryo.writeObject(output,value1);
+            }
+        }
         output.close();
         System.out.println("========= save Inverted list is over =========");
+    }
 
+    // 加载序列化的倒排索引 并 反序列化
+    public void loadInvertedLists(String invertedListFile) {
 
 
     }

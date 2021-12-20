@@ -9,6 +9,9 @@ import java.util.Arrays;
  * @create 2021/12/19 下午7:16
  */
 public class BitSet {
+
+    // 自定义的 BitSet
+    //TODO  后续可能需要调整这个方法
     private static int num = 0;
     private char[] buf;
 
@@ -74,4 +77,10 @@ public class BitSet {
         return num;
     }
 
+    @Override
+    public String toString() {
+        return "BitSet{" +
+                "buf=" + Arrays.toString(buf) +
+                '}';
+    }
 }
