@@ -12,7 +12,7 @@ import java.util.Stack;
  * @author WuChao
  * @create 2021/12/17 下午6:10
  */
-public class Delta_Test {
+public class DeltaCompress {
     // 将c++ 版本的压缩代码改成 Java
 
     private static Stack<Node> deltaStack = new Stack<>();

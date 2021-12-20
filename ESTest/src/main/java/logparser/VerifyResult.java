@@ -1,7 +1,7 @@
 package logparser;
 
 import com.csvreader.CsvReader;
-import logdelta.core.Delta_Test;
+import logdelta.core.DeltaCompress;
 import org.junit.Test;
 
 import java.io.*;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @create 2021/12/13 下午9:13
  */
 public class VerifyResult {
-    static String method = "Drain_result3";
+    static String method = "MoLFI_result";
     static String filePath = "/InfluxDB";
     static String fileName = "/influxdb2_test";
 
@@ -45,11 +45,11 @@ public class VerifyResult {
                 "influxdb-2021-03-30T11-06-23.613.log";
 
         System.out.println("Start Clustering...");
-//        verifyCluster(resultPath, verifyPath, logFilePath);
+        verifyCluster(resultPath, verifyPath, logFilePath);
         System.out.println("Clustering Successful！");
 
         System.out.println("Start count basic string...");
-//        countBasicStr(verifyPath, basicFilePath);
+        countBasicStr(verifyPath, basicFilePath);
         System.out.println("Counting Successful！");
 
 
@@ -200,7 +200,7 @@ public class VerifyResult {
                 method +
                 "/compressedFiles";
         System.out.println(method);
-        printFileName(a, b, c);
+//        printFileName(a, b, c);
         calculateSize(b, a, c);
     }
 
@@ -227,7 +227,7 @@ public class VerifyResult {
             String logFile = f.getPath();
             String basicFile = file2.getPath() + "/" + f.getName() + ".raw";
             String compressFile = file3.getPath() + "/" + f.getName() + ".dlt";
-            Delta_Test.processDelta(logFile,basicFile,compressFile);
+            DeltaCompress.processDelta(logFile,basicFile,compressFile);
         }
 
     }
