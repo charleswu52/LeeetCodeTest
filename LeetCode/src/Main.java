@@ -1,11 +1,5 @@
-import leetcode_everyday.Mar.*;
-import sun.rmi.runtime.Log;
-
-import java.io.Console;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Main {
