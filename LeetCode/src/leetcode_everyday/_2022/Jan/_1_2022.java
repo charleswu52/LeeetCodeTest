@@ -1,12 +1,10 @@
 package leetcode_everyday._2022.Jan;
 
-import jdk.internal.org.objectweb.asm.tree.analysis.Analyzer;
-
 /**
  * @author WuChao
  * @create 2022/1/1 13:06
  */
-public class _1 {
+public class _1_2022 {
     /**
      * 每日一题：2022/1/1
      * <p>
