@@ -38,7 +38,7 @@ public class _4_1725 {
      */
 
     /*
-
+     思路：哈希表统计每个裁剪的正方形的边长
      */
     public int countGoodRectangles(int[][] rectangles) {
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -49,8 +49,5 @@ public class _4_1725 {
             max = Math.max(maxLen, max);
         }
         return map.get(max);
-
-
-
     }
 }
