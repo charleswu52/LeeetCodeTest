@@ -1,9 +1,7 @@
 package leetcode_everyday._2022.Jan;
 
-import com.sun.org.apache.regexp.internal.RE;
 
-import javax.swing.*;
-import java.util.*;
+import java.util.Arrays;
 
 /**
  * @author WuChao
