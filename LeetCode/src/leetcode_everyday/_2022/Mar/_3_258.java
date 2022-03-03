@@ -58,6 +58,7 @@ public class _3_258 {
             ans += num % 10;
             num /= 10;
         }
+        ans += num % 10;
         return ans;
     }
 }
