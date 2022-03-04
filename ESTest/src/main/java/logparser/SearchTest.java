@@ -42,7 +42,7 @@ public class SearchTest {
 //            add(new Pair<>(5, new BitSet()));
 //        }});
 
-        System.out.println(gramList.getListMap());
+//        System.out.println(gramList.getListMap());
 
         Output output = new Output(new FileOutputStream(file, true));
         Kryo kryo = new Kryo();
