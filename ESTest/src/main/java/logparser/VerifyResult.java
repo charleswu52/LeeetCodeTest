@@ -1,7 +1,7 @@
 package logparser;
 
 import com.csvreader.CsvReader;
-import logdelta.core.DeltaCompress;
+//import logdelta.core.DeltaCompress;
 import org.junit.Test;
 
 import java.io.*;
@@ -227,7 +227,7 @@ public class VerifyResult {
             String logFile = f.getPath();
             String basicFile = file2.getPath() + "/" + f.getName() + ".raw";
             String compressFile = file3.getPath() + "/" + f.getName() + ".dlt";
-            DeltaCompress.processDelta(logFile,basicFile,compressFile);
+//            DeltaCompress.processDelta(logFile,basicFile,compressFile);
         }
 
     }
