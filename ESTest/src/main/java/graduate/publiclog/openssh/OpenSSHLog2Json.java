@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
  * @create 2022/3/17 13:32
  */
 public class OpenSSHLog2Json {
-    // 将 Zookeeper log 日志 转化为 导入到 ES中的JSON文件
+    // 将 OpenSSH log 日志 转化为 导入到 ES中的JSON文件
     static final int count = 100000; // 10w条数据一个文件
     static String name = "OpenSSH";
 
@@ -21,8 +21,9 @@ public class OpenSSHLog2Json {
     public static void main(String[] args) {
         String str = "openssh";
         String filePath = "H:\\Work\\LogCompress\\logparser\\allresult\\AEL\\" + name + "\\" + name + ".log_structured.csv";
-        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
-        transform(filePath, outPath, name);
+//        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
+        String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
+//        transform(filePath, outPath, name);
         printImport(outPath, str);
     }
 

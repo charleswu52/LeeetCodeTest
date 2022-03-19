@@ -1,4 +1,4 @@
-package graduate.publiclog.zookeeper;
+package graduate.publiclog.proxifier;
 
 import com.csvreader.CsvReader;
 
@@ -10,20 +10,20 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author WuChao
- * @create 2022/3/17 13:32
+ * @create 2022/3/19 上午8:30
  */
-public class ZookeeperLog2Json {
-    // 将 Zookeeper log 日志 转化为 导入到 ES中的JSON文件
+public class ProxifierLog2Json {
+    // 将 Proxifier log 日志 转化为 导入到 ES中的JSON文件
     static final int count = 100000; // 10w条数据一个文件
-    static String name = "Zookeeper";
+    static String name = "Proxifier";
 
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
     public static void main(String[] args) {
-        String str = "zookeeper";
-        String filePath = "H:\\Work\\LogCompress\\logparser\\allresult\\AEL\\" + name + "\\" + name + ".log_structured.csv";
+        String str = "proxifier";
+        String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
 //        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
         String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
-//        transform(filePath, outPath, name);
+        transform(filePath, outPath, name);
         printImport(outPath, str);
     }
 
@@ -39,15 +39,11 @@ public class ZookeeperLog2Json {
                 long cnt = line / count;
                 // 读取一整行数据
                 Integer id = Integer.parseInt(csvReader.get("LineId"));
-                String date = csvReader.get("Date");
                 String time = csvReader.get("Time");
-                String level = csvReader.get("Level");
-                String node = csvReader.get("Node");
-                String component = csvReader.get("Component");
-                String pid = csvReader.get("Id");
+                String program = csvReader.get("Program");
                 String content = csvReader.get("Content");
-                String value1 = "{\"index\":{\"_index\":\"" + "zookeeper" + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
-                String value2 = "{\"date\":\"" + date + "\",\"time\":\"" + time + "\",\"level\":\"" + level + "\",\"node\":\"" + node + "\",\"component\":\"" + component + "\",\"pid\":\"" + pid + "\",\"content\":\"" + content + "\"}\n";
+                String value1 = "{\"index\":{\"_index\":\"" + "proxifier" + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
+                String value2 = "{\"time\":\"" + time + "\",\"program\":\"" + program + "\",\"content\":\"" + content + "\"}\n";
                 // 写入文件
                 File newFile = new File(outPath + name + "_" + cnt + ".json");
                 if (!newFile.exists()) {
@@ -91,3 +87,4 @@ public class ZookeeperLog2Json {
 
     }
 }
+
