@@ -14,8 +14,9 @@ import java.util.Map;
 public class ResultSplit {
     // 对分类后的文件 按照每个字符串的长度再进行划分
     public static void main(String[] args) {
-        String clusterFilePath = "H:\\Work\\LogCompress\\logparser\\allresult\\LogDelta\\OpenSSH\\clusterFiles";
-        String splitOutPath = "H:\\Work\\LogCompress\\logparser\\allresult\\LogDelta\\OpenSSH\\split\\";
+        String method = "InfluxDB";
+        String clusterFilePath = "H:\\Work\\LogCompress\\logparser\\allresult\\LogDelta\\"+method+"\\clusterFiles";
+        String splitOutPath = "H:\\Work\\LogCompress\\logparser\\allresult\\LogDelta\\"+method+"\\split\\";
         split(clusterFilePath, splitOutPath);
     }
 

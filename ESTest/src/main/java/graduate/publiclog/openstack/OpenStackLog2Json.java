@@ -1,4 +1,4 @@
-package graduate.publiclog.hdfs;
+package graduate.publiclog.openstack;
 
 import com.csvreader.CsvReader;
 
@@ -10,16 +10,16 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author WuChao
- * @create 2022/3/19 上午8:57
+ * @create 2022/3/19 上午10:13
  */
-public class HDFSLog2Json {
-    // 将 HDFS log 日志 转化为 导入到 ES中的JSON文件
+public class OpenStackLog2Json {
+    // 将 OpenStack log 日志 转化为 导入到 ES中的JSON文件
     static final int count = 100000; // 10w条数据一个文件
-    static String name = "HDFS";
+    static String name = "OpenStack";
 
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
     public static void main(String[] args) {
-        String str = "hdfs";
+        String str = "openstack";
         String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
 //        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
         String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
@@ -39,14 +39,16 @@ public class HDFSLog2Json {
                 long cnt = line / count;
                 // 读取一整行数据
                 Integer id = Integer.parseInt(csvReader.get("LineId"));
+                String logrecord = csvReader.get("Logrecord");
                 String date = csvReader.get("Date");
                 String time = csvReader.get("Time");
                 String pid = csvReader.get("Pid");
                 String level = csvReader.get("Level");
                 String component = csvReader.get("Component");
+                String addr = csvReader.get("ADDR");
                 String content = csvReader.get("Content");
-                String value1 = "{\"index\":{\"_index\":\"" + "hdfs" + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
-                String value2 = "{\"date\":\"" + date + "\",\"time\":\"" + time + "\",\"pid\":\"" + pid + "\",\"level\":\"" + level + "\",\"component\":\"" + component + "\",\"content\":\"" + content + "\"}\n";
+                String value1 = "{\"index\":{\"_index\":\"" + "openstack" + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
+                String value2 = "{\"logrecord\":\"" + logrecord +"\",\"date\":\""+date+ "\",\"time\":\"" + time + "\",\"pid\":\"" + pid + "\",\"level\":\"" + level+ "\",\"component\":\"" + component + "\",\"addr\":\"" + addr + "\",\"content\":\"" + content + "\"}\n";
                 // 写入文件
                 File newFile = new File(outPath + name + "_" + cnt + ".json");
                 if (!newFile.exists()) {
