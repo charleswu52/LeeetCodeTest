@@ -10,11 +10,11 @@ import java.nio.charset.StandardCharsets;
 public class GenJson {
     // 将logging数据生成json导入到ES
     public static void main(String[] args) throws Exception {
-        String path = "ESTest/src/main/resources/logging/input_token/";
+        String path = "/media/charles/6E247A97247A61CF/林天成/数据/";
         File file = new File(path);
         File[] tempList = file.listFiles();
         BufferedReader reader = null;
-        String outPath = "ESTest/src/main/resources/logging/output_token/";
+        String outPath = "/media/charles/6E247A97247A61CF/林天成/数据/output/";
         String type = "logging_token_";
         for (int i = 0; i < tempList.length; i++) {
             long line = 1L;
