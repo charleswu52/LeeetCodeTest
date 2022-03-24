@@ -61,4 +61,33 @@ public class QueryToJson {
         }
     }
 
+    public void test()  {
+        String inputPath = "";
+        File file = new File(inputPath);
+        BufferedReader reader = null;
+//        String outPath = "E:\\研究生学习\\ES测试\\ES实验\\logs_trans\\queryFile\\";
+        String outPath = "";
+        int line = 0;
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));//new BufferedReader(new FileReader());
+            String temp = null;
+            while ((temp = reader.readLine()) != null) {
+                File newFile = new File(outPath + "indexname.json");
+                if (!newFile.exists()) {
+                    newFile.createNewFile();
+                }
+                // 获取该文件的缓冲输出流
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile, true), StandardCharsets.UTF_8));
+                // 写入信息
+                bufferedWriter.write("{\"index\":{\"_index\":\"indexname\",\"_type\":\"_doc\",\"_id\":" + (line++) + "}}\n");
+                bufferedWriter.write(temp + "\n");
+                bufferedWriter.flush();// 清空缓冲区
+                bufferedWriter.close();// 关闭输出流
+            }
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

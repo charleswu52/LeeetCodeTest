@@ -1,5 +1,6 @@
 package invertlist;
 
+import org.apache.lucene.util.Accountable;
 import org.apache.lucene.util.RamUsageEstimator;
 
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class ObjectSize {
             return;
         }
 //        String temp = RamUsageEstimator.humanSizeOf(node);
-        long temp = RamUsageEstimator.sizeOf(node);
+        long temp = RamUsageEstimator.sizeOf((Accountable) node);
         System.out.println(node.val);
         System.out.println(RamUsageEstimator.humanReadableUnits(temp));
         size += temp;

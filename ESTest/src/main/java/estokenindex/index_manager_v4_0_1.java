@@ -1,5 +1,6 @@
 package estokenindex;
 
+import org.apache.lucene.util.Accountable;
 import org.apache.lucene.util.RamUsageEstimator;
 
 import java.io.BufferedReader;
@@ -211,7 +212,7 @@ public class index_manager_v4_0_1 {
     }
 
     public long getInvertedListSize() {
-        return RamUsageEstimator.sizeOf(_inverted_index);
+        return RamUsageEstimator.sizeOf((Accountable) _inverted_index);
     }
 
 

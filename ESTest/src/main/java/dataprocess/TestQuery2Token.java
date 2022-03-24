@@ -1,11 +1,12 @@
 package dataprocess;
 
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
-
-//import org.apache.lucene.analysis.standard.StandardAnalyzer;
 
 /**
  * @author WuChao
@@ -47,16 +48,16 @@ public class TestQuery2Token {
         String trans = "";
         int tokenLen=0;
         Set<String> set = new HashSet<>();
-//        StandardAnalyzer analyzer = new StandardAnalyzer();
-//        TokenStream tokenStream = analyzer.tokenStream("", field);
-//        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-//        tokenStream.reset();
-//        while (tokenStream.incrementToken()) {
-//            trans += charTermAttribute.toString() + " ";
-//            set.add(charTermAttribute.toString());
-//            tokenLen++;
-//        }
-//        tokenStream.close();
+        StandardAnalyzer analyzer = new StandardAnalyzer();
+        TokenStream tokenStream = analyzer.tokenStream("", field);
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        tokenStream.reset();
+        while (tokenStream.incrementToken()) {
+            trans += charTermAttribute.toString() + " ";
+            set.add(charTermAttribute.toString());
+            tokenLen++;
+        }
+        tokenStream.close();
         System.out.println("Query：\n" + trans + "\ntokenLength:" + tokenLen + ";tokenSetLen:" + set.size());
     }
 
