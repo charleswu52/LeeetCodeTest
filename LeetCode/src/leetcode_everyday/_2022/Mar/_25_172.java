@@ -1,5 +1,7 @@
 package leetcode_everyday._2022.Mar;
 
+import org.junit.Test;
+
 /**
  * @author WuChao
  * @create 2022/3/25 9:00
@@ -36,5 +38,12 @@ public class _25_172 {
      */
     public int trailingZeroes(int n) {
         return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+    }
+
+    @Test
+    public void test1() {
+        int a = 1577*2;
+        int size = (a >> 3) + ((a & 0x7) != 0 ? 1 : 0);
+        System.out.println(size);
     }
 }
