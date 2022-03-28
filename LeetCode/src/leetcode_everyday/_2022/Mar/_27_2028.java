@@ -67,6 +67,7 @@ public class _27_2028 {
 
 
     }
+
     @Test
     public void test() {
         int[] rolls = {1, 3, 6};
