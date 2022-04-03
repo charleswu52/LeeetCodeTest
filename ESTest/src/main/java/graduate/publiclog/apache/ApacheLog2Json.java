@@ -1,6 +1,9 @@
 package graduate.publiclog.apache;
 
 import com.csvreader.CsvReader;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,10 +23,10 @@ public class ApacheLog2Json {
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
     public static void main(String[] args) {
         String str = "apache";
-        String filePath = "H:\\Work\\LogCompress\\logparser\\allresult\\AEL\\" + name + "\\" + name + ".log_structured.csv";
+        String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/Drain/" + name + "/" + name + ".log_structured.csv";
 //        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
         String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
-//        transform(filePath, outPath, name);
+        transform(filePath, outPath, name);
         printImport(outPath, str);
     }
 
@@ -41,7 +44,7 @@ public class ApacheLog2Json {
                 Integer id = Integer.parseInt(csvReader.get("LineId"));
                 String time = csvReader.get("Time");
                 String level = csvReader.get("Level");
-                String content = csvReader.get("Content");
+                String content = tokenize(csvReader.get("Content"));
                 String value1 = "{\"index\":{\"_index\":\"" + "apache" + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
                 String value2 = "{\"time\":\"" + time +  "\",\"level\":\"" + level + "\",\"content\":\"" + content + "\"}\n";
                 // 写入文件
@@ -85,5 +88,18 @@ public class ApacheLog2Json {
         }
         System.out.println("-------------------------------------");
 
+    }
+
+    public static String tokenize(String str)throws Exception {
+        StringBuilder stringBuilder = new StringBuilder();
+        StandardAnalyzer analyzer = new StandardAnalyzer();
+        TokenStream tokenStream = analyzer.tokenStream("",str);
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        tokenStream.reset();
+        while (tokenStream.incrementToken()) {
+            stringBuilder.append(charTermAttribute + " ");
+        }
+        tokenStream.close();
+        return stringBuilder.substring(0, stringBuilder.length() - 1);
     }
 }
