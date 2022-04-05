@@ -13,11 +13,11 @@ public class _4_307 {
      * 难度：medium
      * <p>
      * 给你一个数组 nums ，请你完成两类查询。
-     *
+     * <p>
      * 其中一类查询要求 更新 数组 nums 下标对应的值
      * 另一类查询要求返回数组 nums 中索引 left 和索引 right 之间（ 包含 ）的nums元素的 和 ，其中 left <= right
      * 实现 NumArray 类：
-     *
+     * <p>
      * NumArray(int[] nums) 用整数数组 nums 初始化对象
      * void update(int index, int val) 将 nums[index] 的值 更新 为 val
      * int sumRange(int left, int right) 返回数组 nums 中索引 left 和索引 right 之间（ 包含 ）的nums元素的 和
@@ -30,16 +30,16 @@ public class _4_307 {
      * 示例
      * <p>
      * 输入：
-     *
+     * <p>
      * ["NumArray", "sumRange", "update", "sumRange"]
      * [[[1, 3, 5]], [0, 2], [1, 2], [0, 2]]
-     *
+     * <p>
      * 输出：
-     *
+     * <p>
      * [null, 9, null, 8]
-     *
+     * <p>
      * 解释：
-     *
+     * <p>
      * NumArray numArray = new NumArray([1, 3, 5]);
      * numArray.sumRange(0, 2); // 返回 1 + 3 + 5 = 9
      * numArray.update(1, 2);   // nums = [1,2,5]
@@ -81,6 +81,7 @@ public class _4_307 {
 
         int[] nums;
         int n;
+
         public NumArray(int[] _nums) {
             nums = _nums;
             n = nums.length;
