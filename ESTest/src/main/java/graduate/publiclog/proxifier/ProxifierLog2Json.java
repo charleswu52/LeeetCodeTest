@@ -1,6 +1,9 @@
 package graduate.publiclog.proxifier;
 
 import com.csvreader.CsvReader;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,7 +44,7 @@ public class ProxifierLog2Json {
                 Integer id = Integer.parseInt(csvReader.get("LineId"));
                 String time = csvReader.get("Time");
                 String program = csvReader.get("Program");
-                String content = csvReader.get("Content");
+                String content = tokenize(csvReader.get("Content"));
                 String value1 = "{\"index\":{\"_index\":\"" + "proxifier" + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
                 String value2 = "{\"time\":\"" + time + "\",\"program\":\"" + program + "\",\"content\":\"" + content + "\"}\n";
                 // 写入文件
@@ -85,6 +88,18 @@ public class ProxifierLog2Json {
         }
         System.out.println("-------------------------------------");
 
+    }
+    public static String tokenize(String str) throws Exception {
+        StringBuilder stringBuilder = new StringBuilder();
+        StandardAnalyzer analyzer = new StandardAnalyzer();
+        TokenStream tokenStream = analyzer.tokenStream("", str);
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        tokenStream.reset();
+        while (tokenStream.incrementToken()) {
+            stringBuilder.append(charTermAttribute + " ");
+        }
+        tokenStream.close();
+        return stringBuilder.substring(0, stringBuilder.length() - 1);
     }
 }
 
