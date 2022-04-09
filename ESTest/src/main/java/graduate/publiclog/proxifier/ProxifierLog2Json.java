@@ -25,7 +25,7 @@ public class ProxifierLog2Json {
         String str = "proxifier";
         String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
 //        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
-        String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
+        String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/all/";
         transform(filePath, outPath, name);
         printImport(outPath, str);
     }

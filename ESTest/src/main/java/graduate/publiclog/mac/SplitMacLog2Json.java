@@ -1,4 +1,4 @@
-package graduate.publiclog.apache;
+package graduate.publiclog.mac;
 
 import com.csvreader.CsvReader;
 import org.apache.lucene.analysis.TokenStream;
@@ -13,20 +13,22 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author WuChao
- * @create 2022/3/19 上午8:57
+ * @create 2022/3/17 13:32
  */
-public class SplitApacheLog2Json {
-    // 将 Apache log 日志 转化为 导入到 ES中的JSON文件
+public class SplitMacLog2Json {
+    // 将 OpenSSH log 日志 转化为 导入到 ES中的JSON文件
     static final int count = 100000; // 10w条数据一个文件
-    static String name = "Apache";
-    static int size = 500;
+    static String name = "Mac";
+    static int size = 100000;
+
 
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
     public static void main(String[] args) throws Exception {
-        String str = "apache";
-        String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/Drain/" + name + "/" + name + ".log_structured.csv";
+        String str = "mac";
+        String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
         String jsonOutPutPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/" + size + "/";
         String originOutPutPath = "/media/charles/My Passport/Work/LogCompress/logsearch/" + name + "/" + size + "/origin/";
+
         transform(filePath, jsonOutPutPath, name);
         verifyCluster(filePath, originOutPutPath);
         printImport(jsonOutPutPath, str);
@@ -44,11 +46,23 @@ public class SplitApacheLog2Json {
                 long cnt = line / count;
                 // 读取一整行数据
                 Integer id = Integer.parseInt(csvReader.get("LineId"));
+                String month = csvReader.get("Month");
+                String date = csvReader.get("Date");
                 String time = csvReader.get("Time");
-                String level = csvReader.get("Level");
+                String user = csvReader.get("User");
+                String component = csvReader.get("Component");
+                String pid = csvReader.get("PID");
+                String address = csvReader.get("Address");
                 String content = tokenize(csvReader.get("Content"));
-                String value1 = "{\"index\":{\"_index\":\"" + "apache_" + size + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
-                String value2 = "{\"time\":\"" + time + "\",\"level\":\"" + level + "\",\"content\":\"" + content + "\"}\n";
+                String value1 = "{\"index\":{\"_index\":\"" + "mac_" + size + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
+                String value2 = "{\"month\":\"" + month +
+                        "\",\"date\":\"" + date +
+                        "\",\"time\":\"" + time +
+                        "\",\"user\":\"" + user +
+                        "\",\"component\":\"" + component +
+                        "\",\"pid\":\"" + pid +
+                        "\",\"address\":\"" + address +
+                        "\",\"content\":\"" + content + "\"}\n";
                 // 写入文件
                 File newFile = new File(outPath + name + "_" + size + "_" + cnt + ".json");
                 if (!newFile.exists()) {
@@ -71,8 +85,8 @@ public class SplitApacheLog2Json {
     }
 
     /*
-     输出到查询测试文件
-     */
+    输出到查询测试文件
+    */
     public static void verifyCluster(String resultFile, String outputPath) throws Exception {
         // 读取结果文件 并存到 Map 中
         CsvReader csvReader = new CsvReader(resultFile);

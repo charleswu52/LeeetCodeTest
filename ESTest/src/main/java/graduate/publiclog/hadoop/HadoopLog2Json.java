@@ -1,6 +1,9 @@
 package graduate.publiclog.hadoop;
 
 import com.csvreader.CsvReader;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,7 +24,6 @@ public class HadoopLog2Json {
     public static void main(String[] args) {
         String str = "hadoop";
         String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
-//        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
         String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
         transform(filePath, outPath, name);
         printImport(outPath, str);
@@ -44,7 +46,7 @@ public class HadoopLog2Json {
                 String level = csvReader.get("Level");
                 String process = csvReader.get("Process");
                 String component = csvReader.get("Component");
-                String content = csvReader.get("Content");
+                String content = tokenize(csvReader.get("Content"));
                 String value1 = "{\"index\":{\"_index\":\"" + "hadoop" + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
                 String value2 = "{\"date\":\"" + date +
                         "\",\"time\":\"" + time +
@@ -93,5 +95,17 @@ public class HadoopLog2Json {
         }
         System.out.println("-------------------------------------");
 
+    }
+    public static String tokenize(String str) throws Exception {
+        StringBuilder stringBuilder = new StringBuilder();
+        StandardAnalyzer analyzer = new StandardAnalyzer();
+        TokenStream tokenStream = analyzer.tokenStream("", str);
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        tokenStream.reset();
+        while (tokenStream.incrementToken()) {
+            stringBuilder.append(charTermAttribute + " ");
+        }
+        tokenStream.close();
+        return stringBuilder.substring(0, stringBuilder.length() - 1);
     }
 }

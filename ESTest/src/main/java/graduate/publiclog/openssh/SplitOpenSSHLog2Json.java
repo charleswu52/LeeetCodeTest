@@ -19,15 +19,15 @@ public class SplitOpenSSHLog2Json {
     // 将 OpenSSH log 日志 转化为 导入到 ES中的JSON文件
     static final int count = 100000; // 10w条数据一个文件
     static String name = "OpenSSH";
-    static int size = 500;
+    static int size = 100000;
 
 
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
     public static void main(String[] args) throws Exception {
         String str = "openssh";
         String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/Drain/" + name + "/" + name + ".log_structured.csv";
-        String jsonOutPutPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
-        String originOutPutPath = "";
+        String jsonOutPutPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/" + size + "/";
+        String originOutPutPath = "/media/charles/My Passport/Work/LogCompress/logsearch/" + name + "/" + size + "/origin/";
         transform(filePath, jsonOutPutPath, name);
         verifyCluster(filePath, originOutPutPath);
         printImport(jsonOutPutPath, str);

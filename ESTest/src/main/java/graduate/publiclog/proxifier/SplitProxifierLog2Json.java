@@ -19,16 +19,18 @@ public class SplitProxifierLog2Json {
     // 将 Proxifier log 日志 转化为 导入到 ES中的JSON文件
     static final int count = 100000; // 10w条数据一个文件
     static String name = "Proxifier";
-    static int size = 500;
+    static int size = 20000;
 
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String str = "proxifier";
         String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
 //        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
-        String jsonOutPutPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
-        String originOutPutPath = "";
+        String jsonOutPutPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/" + size + "/";
+        String originOutPutPath = "/media/charles/My Passport/Work/LogCompress/logsearch/" + name + "/" + size + "/origin/";
         transform(filePath, jsonOutPutPath, name);
+        verifyCluster(filePath, originOutPutPath);
+
         printImport(jsonOutPutPath, str);
     }
 
@@ -46,11 +48,11 @@ public class SplitProxifierLog2Json {
                 Integer id = Integer.parseInt(csvReader.get("LineId"));
                 String time = csvReader.get("Time");
                 String program = csvReader.get("Program");
-                String content = csvReader.get("Content");
-                String value1 = "{\"index\":{\"_index\":\"" + "proxifier_"+size + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
+                String content = tokenize(csvReader.get("Content"));
+                String value1 = "{\"index\":{\"_index\":\"" + "proxifier_" + size + "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
                 String value2 = "{\"time\":\"" + time + "\",\"program\":\"" + program + "\",\"content\":\"" + content + "\"}\n";
                 // 写入文件
-                File newFile = new File(outPath + name + "_" + size + "_"+ cnt + ".json");
+                File newFile = new File(outPath + name + "_" + size + "_" + cnt + ".json");
                 if (!newFile.exists()) {
                     newFile.createNewFile();
                 }
@@ -81,7 +83,7 @@ public class SplitProxifierLog2Json {
             String fileName = tempList[i].getAbsolutePath();
 //            System.out.println(fileName);
             String print = "curl -H \"Content-Type: application/json\" -XPOST 'localhost:9200/" +
-                    str +"_" + size +
+                    str + "_" + size +
                     "/_bulk?pretty' --data-binary \"@" +
                     fileName +
                     "\"";
@@ -90,6 +92,7 @@ public class SplitProxifierLog2Json {
         System.out.println("-------------------------------------");
 
     }
+
     /*
      输出到查询测试文件
      */

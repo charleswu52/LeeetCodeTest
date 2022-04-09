@@ -23,10 +23,10 @@ public class ZookeeperLog2Json {
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
     public static void main(String[] args) {
         String str = "zookeeper";
-        String filePath = "H:\\Work\\LogCompress\\logparser\\allresult\\AEL\\" + name + "\\" + name + ".log_structured.csv";
+        String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
 //        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
-        String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
-//        transform(filePath, outPath, name);
+        String outPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/all/";
+        transform(filePath, outPath, name);
         printImport(outPath, str);
     }
 

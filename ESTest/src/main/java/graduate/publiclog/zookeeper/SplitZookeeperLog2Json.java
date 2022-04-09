@@ -19,16 +19,16 @@ public class SplitZookeeperLog2Json {
     // 将 Zookeeper log 日志 转化为 导入到 ES中的JSON文件
     static final int count = 100000; // 10w条数据一个文件
     static String name = "Zookeeper";
-    static int size = 500;
+    static int size = 50000;
 
 
     // 将 ESRally中的 json数据转换为可以导入ES中的json 数据
     public static void main(String[] args)throws Exception {
         String str = "zookeeper";
-        String filePath = "H:\\Work\\LogCompress\\logparser\\allresult\\AEL\\" + name + "\\" + name + ".log_structured.csv";
+        String filePath = "/media/charles/My Passport/Work/LogCompress/logparser/allresult/AEL/" + name + "/" + name + ".log_structured.csv";
 //        String outPath = "H:\\Work\\LogCompress\\logparser\\allLogs2Json\\" + name + "\\";
-        String jsonOutPutPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/";
-        String originOutPutPath = "";
+        String jsonOutPutPath = "/media/charles/My Passport/Work/LogCompress/logparser/allLogs2Json/" + name + "/" + size + "/";
+        String originOutPutPath = "/media/charles/My Passport/Work/LogCompress/logsearch/" + name + "/" + size + "/origin/";
         transform(filePath, jsonOutPutPath, name);
         verifyCluster(filePath, originOutPutPath);
         printImport(jsonOutPutPath, str);
@@ -52,7 +52,7 @@ public class SplitZookeeperLog2Json {
                 String node = csvReader.get("Node");
                 String component = csvReader.get("Component");
                 String pid = csvReader.get("Id");
-                String content = csvReader.get("Content");
+                String content = tokenize(csvReader.get("Content"));
                 String value1 = "{\"index\":{\"_index\":\"" + "zookeeper_" +size+ "\",\"_type\":\"_doc\",\"_id\":" + id + "}}\n";
                 String value2 = "{\"date\":\"" + date + "\",\"time\":\"" + time + "\",\"level\":\"" + level + "\",\"node\":\"" + node + "\",\"component\":\"" + component + "\",\"pid\":\"" + pid + "\",\"content\":\"" + content + "\"}\n";
                 // 写入文件
