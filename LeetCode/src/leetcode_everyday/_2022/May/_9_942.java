@@ -6,7 +6,7 @@ package leetcode_everyday._2022.May;
  */
 public class _9_942 {
     /**
-     * 每日一题：2022/5/8
+     * 每日一题：2022/5/9
      * <p>
      * 942. 增减字符串匹配
      * <p>
