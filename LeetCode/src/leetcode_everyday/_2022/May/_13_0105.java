@@ -24,7 +24,7 @@ public class _13_0105 {
      */
 
     /*
-    思路：动态规划（经典编辑距离算法）
+    思路1：动态规划（经典编辑距离算法）
      */
     public boolean oneEditAway(String first, String second) {
         int m = first.length(), n = second.length();
@@ -49,7 +49,5 @@ public class _13_0105 {
             }
         }
         return dp[m][n] <= 1;
-
-
     }
 }
