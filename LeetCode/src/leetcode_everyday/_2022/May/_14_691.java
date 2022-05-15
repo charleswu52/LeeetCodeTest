@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class _14_691 {
     /**
-     * 每日一题：2022/5/13
+     * 每日一题：2022/5/14
      * <p>
      * 691. 贴纸拼词
      * <p>
