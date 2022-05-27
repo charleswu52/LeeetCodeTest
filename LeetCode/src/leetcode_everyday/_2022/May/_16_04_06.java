@@ -4,7 +4,7 @@ package leetcode_everyday._2022.May;
  * @author WuChao
  * @create 2022/5/16 9:09
  */
-public class _16_0406 {
+public class _16_04_06 {
     /**
      * 每日一题：2022/5/16
      * <p>
